@@ -50,9 +50,6 @@ html,body{margin:0;padding:0;scroll-behavior:smooth}
 .sp-txt{font-family:var(--sans);font-size:11px;color:#4A453E;letter-spacing:2px;text-transform:uppercase}
 
 /* ===== الغرف المباشرة ===== */
-.rm-pill{position:fixed;bottom:20px;left:64px;z-index:60;display:none;align-items:center;gap:10px;background:rgba(20,18,15,.94);
-  border:1px solid rgba(192,154,86,.4);color:#E8DFC8;font-family:var(--sans);font-size:12.5px;padding:8px 14px;cursor:pointer;backdrop-filter:blur(4px)}
-.rm-pill.on{display:flex}
 .rm-pill:hover{border-color:var(--folder)}
 .rm-pill .dot{width:8px;height:8px;border-radius:50%;background:#6B6459;flex-shrink:0}
 .rm-pill .dot.ok{background:#3FA066;box-shadow:0 0 0 3px rgba(63,160,102,.22)}
@@ -146,13 +143,123 @@ html,body{margin:0;padding:0;scroll-behavior:smooth}
 .rm-bar{height:7px;background:rgba(255,255,255,.07);display:block}
 .rm-bar i{display:block;height:100%;background:var(--folder)}
 .rm-bar i.r{background:#7FA6D6}.rm-bar i.c{background:#B8664F}
-.rm-chips{display:flex;gap:6px;margin-top:2px}
-.rm-chip{font-size:11px;color:#9C9382;border:1px solid #3A342C;padding:2px 9px}
-.rm-chip.warn{color:#E0A040;border-color:rgba(224,160,64,.5)}
 .rm-tcf{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06);font-size:12px;color:#8E8676}
 .rm-tcf b{color:#E8DFC8}
 .rm-sc{font-family:var(--serif);font-size:24px;color:var(--folder)}.rm-sc i{font-style:normal;font-family:var(--sans);font-size:11px;color:#8E8676}
-@media(max-width:600px){.rm-pill{left:60px;font-size:11.5px;padding:7px 10px;gap:7px}.rm-stats{justify-content:flex-start}.rm-hhead{padding:14px}}
+
+.rm-dock{position:fixed;bottom:20px;left:64px;z-index:60;display:none;align-items:stretch;gap:8px}
+.rm-dock.on{display:flex}
+.rm-pill{display:flex;align-items:center;gap:10px;background:rgba(20,18,15,.94);border:1px solid rgba(192,154,86,.4);color:#E8DFC8;font-family:var(--sans);font-size:12.5px;padding:8px 14px;cursor:pointer;backdrop-filter:blur(4px)}
+.rm-help{background:rgba(20,18,15,.94);border:1px solid #4A443B;color:#C7BEA9;font-family:var(--sans);font-size:12.5px;padding:8px 12px;cursor:pointer;backdrop-filter:blur(4px)}
+.rm-help:hover{border-color:var(--folder);color:var(--folder)}
+.rm-help.on{background:rgba(63,160,102,.18);border-color:rgba(63,160,102,.6);color:#8FD3A8}
+.rm-chips{display:flex;gap:8px;flex-wrap:wrap}
+.rm-chip{font-family:var(--sans);background:transparent;border:1px solid #4A443B;color:#C7BEA9;padding:7px 13px;font-size:13px;cursor:pointer}
+.rm-chip:hover{border-color:var(--folder)}
+.rm-chip.on{background:rgba(192,154,86,.16);border-color:var(--folder);color:var(--folder);font-weight:700}
+.rm-chip.sm{padding:2px 9px;font-size:11px;cursor:default;color:#9C9382;border-color:#3A342C;display:inline-block}
+.rm-chip.sm.ok{color:#8FD3A8;border-color:rgba(63,160,102,.5)}
+.rm-chip.sm.warn{color:#E0A040;border-color:rgba(224,160,64,.5)}
+.rm-host .hint{color:#8E8676;font-size:12.5px}
+.rm-host .cnt{font-family:var(--serif);font-size:20px;color:var(--folder)}
+.rm-spin{width:34px;height:34px;border:3px solid rgba(0,0,0,.12);border-top-color:var(--folder-d);border-radius:50%;margin:10px auto;animation:rmsp 1s linear infinite}
+@keyframes rmsp{to{transform:rotate(360deg)}}
+.rm-bigcode{font-family:var(--sans);font-size:30px;letter-spacing:8px;color:var(--blood);font-weight:700;margin:4px 0}
+.rm-urgent{background:var(--blood);color:#fff;margin:0;padding:14px 22px}
+.rm-msgtxt{font-family:var(--serif);font-size:22px;line-height:1.7;margin:12px 0}
+.rm-toast.hint{border-inline-start-color:#3FA066}
+.rm-banner small{color:#9C9382;font-family:var(--sans);font-size:12px}
+.rm-det{background:#141210;border:1px solid rgba(255,255,255,.07);margin-bottom:12px}
+.rm-det>summary{cursor:pointer;padding:12px 16px;font-size:14px;color:var(--folder);font-weight:700;list-style:none}
+.rm-det>summary::-webkit-details-marker{display:none}
+.rm-det>summary::before{content:"▸ ";color:#8E8676}.rm-det[open]>summary::before{content:"▾ "}
+.rm-detb{padding:4px 16px 16px}
+.rm-joinrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.rm-pending{border-color:rgba(224,160,64,.5);background:rgba(224,160,64,.07);margin-bottom:12px}
+.rm-req{display:flex;gap:8px;align-items:center;padding:8px 0;border-top:1px dotted rgba(255,255,255,.1);margin-top:8px}
+.rm-req b{font-family:var(--serif);font-size:17px}
+.rm-tc.helpme{border-color:#E0705F;box-shadow:0 0 0 1px rgba(224,112,95,.5)}
+.rm-helpbar{display:flex;align-items:center;gap:10px;justify-content:space-between;background:rgba(224,112,95,.14);border:1px solid rgba(224,112,95,.5);color:#FFB3A6;padding:6px 10px;margin:8px 0;font-size:13px}
+.rm-asg{font-size:12px;color:#9C9382;margin:-2px 0 8px}.rm-asg b{color:#E8DFC8}
+.rm-x{font-size:11.5px;border:1px solid #3A342C;padding:2px 8px;color:#8E8676}
+.rm-grp{display:inline-block;width:11px;height:11px;border-radius:2px;margin-inline-start:8px;vertical-align:middle}
+.rm-filters{gap:14px;margin:10px 0}.rm-filters label{font-size:12px;color:#8E8676;display:flex;align-items:center;gap:6px}
+.rm-in.sel{width:auto;padding:6px 8px;font-size:13px;min-width:130px;max-width:260px}
+.rm-table.dk th{color:#8E8676}.rm-table.dk td{border-bottom:1px dotted rgba(255,255,255,.1);color:#E8DFC8}
+.rm-table.dk td .rm-mem{margin:2px 0 0}
+.rm-rlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px 14px;margin-top:4px}
+.rm-ml{border-top:1px dotted rgba(255,255,255,.1);padding:8px 0}.rm-mltx{font-family:var(--serif);font-size:15px;color:#F2EDDF;margin-bottom:5px}
+.rm-chk.dkb{color:var(--ink);margin:10px 0}
+.rm-box .rm-chk{color:var(--ink)}
+@media(max-width:600px){.rm-dock{left:60px}.rm-pill{font-size:11.5px;padding:7px 10px;gap:7px}.rm-help{padding:7px 9px;font-size:11.5px}}
+
+/* ===== v23: الترتيب اللايف + شاشة العرض + درج التفاصيل ===== */
+.lrk{position:relative}
+.lr{position:absolute;inset-inline:0;height:68px;display:grid;grid-template-columns:54px 74px 1fr 118px;align-items:center;gap:10px;
+  background:#1A1612;border:1px solid rgba(255,255,255,.08);padding:0 14px;color:#F2EDDF;
+  transition:transform .7s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s,opacity .5s}
+.lr.first{border-color:var(--folder);box-shadow:0 0 0 1px var(--folder),0 0 22px rgba(192,154,86,.22);background:linear-gradient(90deg,rgba(192,154,86,.12),#1A1612 42%)}
+.lr.gone{opacity:0}
+.lr .rk{font-family:var(--serif);font-size:32px;font-weight:700;color:#8E8676;text-align:center;line-height:1}
+.lr.first .rk{color:var(--folder)}
+.lr .dl{font-family:var(--sans);font-size:13px;font-weight:700;text-align:center;opacity:0;transition:opacity .4s;padding:3px 0;min-height:22px}
+.lr .dl.up{opacity:1;color:#8FE0AC;background:rgba(63,160,102,.18);border:1px solid rgba(63,160,102,.55)}
+.lr .dl.dn{opacity:1;color:#FF9A8A;background:rgba(224,112,95,.15);border:1px solid rgba(224,112,95,.5)}
+.lr .dl.nw{opacity:1;color:var(--folder);background:rgba(192,154,86,.14);border:1px solid rgba(192,154,86,.5)}
+.lr .nm{font-family:var(--serif);font-size:20px;line-height:1.25;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.lr .nm small{display:block;font-family:var(--sans);font-size:11px;color:#8E8676;margin-top:2px;overflow:hidden;text-overflow:ellipsis}
+.lr .prog{height:5px;background:rgba(255,255,255,.08);margin-top:5px;max-width:260px}.lr .prog i{display:block;height:100%;background:var(--folder);transition:width .7s}
+.lr .pt{text-align:center}.lr .pt b{display:block;font-family:var(--serif);font-size:27px;line-height:1}.lr .pt span{font-family:var(--sans);font-size:10.5px;color:#8E8676}
+.lr .crown{font-size:17px;margin-inline-end:6px}
+.lead{background:var(--blood);color:#fff;padding:7px 14px;font-size:13px;font-weight:700;margin-bottom:10px;display:none;animation:rmpop .5s}
+@keyframes rmpop{from{transform:scale(.96);opacity:0}to{transform:none;opacity:1}}
+.rm-screen{position:fixed;inset:0;z-index:9500;background:var(--desk);overflow:auto;padding:22px 34px 40px;color:#F2EDDF}
+.rs-head{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:18px;border-bottom:1px solid rgba(192,154,86,.25);padding-bottom:14px}
+.rs-logo{font-family:var(--serif);font-size:34px;font-weight:700}.rs-logo span{color:var(--folder)}
+.rs-info{margin-inline-start:auto;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.rs-mode{font-family:var(--sans);font-size:13px;color:#E8C27A;border:1px solid rgba(224,160,64,.5);padding:4px 12px}
+.rs-join{font-family:var(--sans);font-size:15px;color:#C7BEA9}.rs-join b{font-size:34px;letter-spacing:8px;color:var(--folder);margin-inline-start:10px;direction:ltr;display:inline-block}
+.rs-x{background:transparent;border:1px solid #4A443B;color:#C7BEA9;font-size:18px;padding:6px 12px;cursor:pointer}
+.rs-lead{margin-bottom:12px;font-size:20px;text-align:center}
+.lr.big{grid-template-columns:78px 96px 1fr 150px;padding:0 24px}
+.lr.big .rk{font-size:52px}.lr.big .nm{font-size:34px}.lr.big .nm small{font-size:15px}.lr.big .pt b{font-size:46px}.lr.big .dl{font-size:20px;min-height:32px}
+.lr.big .prog{height:8px;max-width:420px}.lr.big .crown{font-size:30px}
+body.rm-screen-mode #root,body.rm-screen-mode #top,body.rm-screen-mode #fsBtn,body.rm-screen-mode #saveIndicator{visibility:hidden}
+/* درج التفاصيل */
+.rm-box.dk{background:#141210;color:#F2EDDF;border-top-color:var(--folder);max-width:980px}
+.rm-drawer{padding:16px 18px 22px;font-family:var(--sans)}
+.rm-dh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.1)}
+.rm-dn{font-family:var(--serif);font-size:26px}
+.rm-dgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}@media(max-width:760px){.rm-dgrid{grid-template-columns:1fr}}
+.rm-dbox{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);padding:12px 14px;min-width:0}
+.rm-dbox h4{font-size:12.5px;color:var(--folder);margin-bottom:10px;letter-spacing:.5px}
+.rm-bl.wide{grid-template-columns:62px 104px 1fr;margin-bottom:6px}
+.rm-bar i.t{background:#7FA6D6}
+.rm-note{font-size:12.5px;padding:7px 10px;margin-top:8px;border:1px solid rgba(255,255,255,.12);color:#C7BEA9}
+.rm-note.warn{border-color:rgba(224,160,64,.5);color:#E8C27A;background:rgba(224,160,64,.08)}
+.rm-note.ok{border-color:rgba(63,160,102,.5);color:#8FD3A8;background:rgba(63,160,102,.08)}
+.rm-proj{font-size:13px;color:#C7BEA9;margin-top:8px}.rm-proj b{color:var(--folder);font-family:var(--serif);font-size:18px}
+.rm-tl{border-inline-start:2px solid #3A342C;padding-inline-start:12px;display:grid;gap:7px;max-height:300px;overflow:auto}
+.rm-tl div{position:relative;font-size:12.5px;color:#E8DFC8}
+.rm-tl div::before{content:"";position:absolute;inset-inline-start:-17px;top:7px;width:7px;height:7px;border-radius:50%;background:var(--folder)}
+.rm-tl div.bad::before{background:#E0705F}.rm-tl div.ok::before{background:#3FA066}
+.rm-tl time{color:#8E8676;font-size:11px;margin-inline-end:8px;direction:ltr;display:inline-block;min-width:38px}
+.rm-sub{font-size:11.5px;color:#8E8676;margin:10px 0 5px}
+.rm-docs{display:flex;gap:5px;flex-wrap:wrap}
+.rm-dc{font-size:11px;padding:2px 8px;border:1px solid #3A342C;color:#6F685C}
+.rm-dc.r{color:#E8DFC8;border-color:rgba(192,154,86,.5);background:rgba(192,154,86,.1)}
+.rm-fnd{font-size:12px;color:#E8DFC8;border-inline-start:3px solid #3FA066;padding:3px 8px;margin-bottom:4px;background:rgba(63,160,102,.06)}
+.rm-att{border:1px solid rgba(255,255,255,.1);border-inline-start:4px solid #E0A040;padding:8px 10px;margin-bottom:8px;font-size:12.5px}
+.rm-att.ok{border-inline-start-color:#3FA066}.rm-att.bad{border-inline-start-color:#E0705F}
+.rm-hrow{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dotted rgba(255,255,255,.1);font-size:12.5px}
+.rm-hrow b{font-family:var(--serif);font-size:15px}.rm-hrow span{color:#8E8676}
+.rm-feed{display:grid;gap:5px;max-height:260px;overflow:auto}
+.rm-fi{display:flex;gap:10px;font-size:13px;padding:4px 0;border-bottom:1px dotted rgba(255,255,255,.08)}
+.rm-fi time{color:#8E8676;font-size:12px;direction:ltr;min-width:44px}
+.rm-tc{cursor:pointer}.rm-tc:hover{border-color:rgba(192,154,86,.55)}
+.rm-x[data-det]{color:#C09A56;border-color:rgba(192,154,86,.4);margin-inline-end:6px}
+@media(max-width:700px){.lr{grid-template-columns:44px 58px 1fr 86px;padding:0 8px}.lr .nm{font-size:16px}.lr .pt b{font-size:22px}.lr.big{grid-template-columns:50px 64px 1fr 96px;padding:0 10px}.lr.big .nm{font-size:22px}.lr.big .rk{font-size:34px}.lr.big .pt b{font-size:30px}.rm-screen{padding:14px}}
+
 /* ===== Animations ===== */
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -10548,7 +10655,7 @@ function setLang(l){
   LANG=l;
   document.documentElement.lang=l;
   document.documentElement.dir=l==="ar"?"rtl":"ltr";
-  if(S.view==="hub")hub();else if(S.view==="setup")setup(S.ci);else draw();
+  if(S.view==="hub")hub();else if(S.view==="setup")setup(S.ci);else if(S.view==="coord")coord();else if(S.view==="board"&&typeof board==="function")board();else draw();
 }
 function langBtn(){return '<button id="langSw" title="'+t().langTitle+'">'+t().langBtn+'</button>';}
 function wireLang(){const b=document.getElementById("langSw");if(b)b.onclick=()=>setLang(LANG==="ar"?"en":"ar");}
@@ -12757,7 +12864,7 @@ function hubList(){
     var isOpen=tierId===1; /* أول مستوى مفتوح */
 
     var cards=idx.map(function(i){
-      var c=loc(i),lk=i>=S.unlocked,dn=S.solved.has(c.id);
+      var c=loc(i),lk=i>=S.unlocked||(typeof rmCaseLocked==="function"&&rmCaseLocked(i)),dn=S.solved.has(c.id);
       return '<button class="hc" data-case="'+i+'" '+(lk?'disabled':'')+'>'+
         clipSvg()+
         '<div class="hc-file'+(lk?' locked':'')+'">'+
@@ -13391,7 +13498,7 @@ function verdict(){
   const okWho=who===c.culprit,okPf=pfs.length===2&&pfs.every(p=>sup.indexOf(p)>=0);
   const nameOf=id=>c.people.find(p=>p.id===id).name;
   S.attempts++;
-  if(typeof rmSchedule==="function")rmSchedule();
+  if(typeof rmOnAttempt==="function")rmOnAttempt();
   memoFire("rej",LANG==="ar"?"تنبيه":"Notice");
   S.hist=S.hist||{};
   S.hist[C().id]={tries:S.attempts,nud:S.nudges,con:S.conTries,wrong:(S.wrongNames||[]).slice()};
@@ -13548,21 +13655,24 @@ if("serviceWorker" in navigator){
 }
 paintBG();
 /* =====================================================================
-   الغرف المباشرة — Live Rooms
-   المنسّق بيعمل غرفة وبياخد كود، والفرق بتدخل بالكود، والتقدّم بيظهر لايف.
-   الاتصال: Firebase Realtime Database لو اتحطّت الإعدادات تحت،
-   وإلا بيشتغل وضع تجريبي محلي (نفس المتصفح فقط) للتجربة.
+   الغرف المباشرة — Live Rooms (v22)
+   المنسّق بيعمل غرفة وبياخد كود. الفرق بتدخل بالكود (بموافقته أو مفتوح).
+   التقدّم لايف، توزيع القضايا، رسائل موجّهة، طرد، وطلب مساعدة.
+   الاتصال: Firebase Realtime Database لو الإعدادات اتحطّت، وإلا وضع تجريبي محلي.
    ===================================================================== */
-const RM_APP_VER="v21-rooms";
+const RM_APP_VER="v23-rooms";
 /* ← الصق هنا إعدادات Firebase (Project settings ▸ Your apps ▸ Web app) */
 const RM_FIREBASE_CONFIG={apiKey:"AIzaSyB1uQzbqn3FQpNpM4uLzQh-52UeOD_NQnw",authDomain:"case-files-c3b1e.firebaseapp.com",databaseURL:"https://case-files-c3b1e-default-rtdb.firebaseio.com",projectId:"case-files-c3b1e",appId:"1:707863157302:web:6c57c6f1481d16264ed697"};
 const RM_LINK=(function(){try{return new URLSearchParams(location.search).get("room");}catch(e){return null;}})();
+const RM_SCREEN=(function(){try{return new URLSearchParams(location.search).get("screen");}catch(e){return null;}})();
 const RM_NS=(function(){try{return new URLSearchParams(location.search).get("ns")||"";}catch(e){return "";}})();
-const RM_SESS_KEY="mm_room_session_v1"+RM_NS;
+const RM_SESS_KEY="mm_room_session_v2"+RM_NS;
 
 var RM={active:false,role:null,code:null,teamId:null,hostKey:null,teamName:"",results:[],room:null,
-  be:null,unsub:null,hb:null,tick:null,pushT:null,lastSig:"",err:null,first:true,
-  seenMsg:null,seenAssign:null,assignDismissed:null,prog:{},ingested:{},ready:false};
+  be:null,unsub:null,hb:null,tick:null,pushT:null,lastSig:"",err:null,first:true,fresh:false,
+  seenMsgs:{},seenAssign:null,assignOpened:null,prog:{},ingested:{},plan:null,rcpt:null,distSig:"",msgSig:"",
+  lastPend:{},lastHelp:{},cleaning:{},title0:"",kickedShown:false,endedShown:false,verWarned:false,boardOpen:false,
+  acc:[],joined:null,onl:{},drawerTid:null,screenKey:null,screenCode:"",presT:null};
 
 /* ---------- نصوص ---------- */
 const RM_T={
@@ -13574,32 +13684,65 @@ const RM_T={
   errCode:"الكود لازم يكون ٥ حروف أو أرقام على الأقل.",errNeedName:"اكتب اسم الفريق.",
   errNoRoom:"مفيش غرفة بالكود ده. اتأكد من الكود.",errEnded:"الغرفة دي اتقفلت من المنسّق.",
   errLocked:"الدخول مقفول دلوقتي. اطلب من المنسّق يفتحه.",errName:"اسم الفريق ده مستخدم في الغرفة. اختار اسم تاني.",
+  errBanned:"الفريق ده اتشال من الغرفة ومش مسموح له يدخل تاني.",
   errNet:"تعذّر الاتصال: ",connecting:"بيتّصل…",
+  waitT:"في انتظار موافقة المنسّق",waitP:"طلبك اتبعت. لما المنسّق يقبله هتدخل لوحدك.",waitLong:"لسه مستني… اتأكد إن المنسّق فاتح لوحة الغرفة.",
+  rejectedT:"المنسّق رفض طلب الدخول.",tryAgain:"حاول تاني",
+  kickedT:"اتشال فريقك من الغرفة",kickedP:"المنسّق شال الفريق من الغرفة. اتواصل معاه لو ده حصل بالغلط.",
   rank:"ترتيبك",pts:"نقطة",solvedN:"محسومة",boardT:"ترتيب الفرق",
   boardHidden:"المنسّق مخفي الترتيب دلوقتي. هتشوف فريقك بس.",you:"فريقك",
   cTeam:"الفريق",cSolved:"محسومة",cScore:"النقاط",cNow:"دلوقتي",
   stHub:"في الردهة",stSetup:"بيجهّز",stCase:"بيحقّق",
-  bannerAssign:"المنسّق حدّد القضية:",bannerOpen:"افتحها",
-  toastMsg:"رسالة من المنسّق",toastAssign:"المنسّق حدّد قضية جديدة",
+  bannerAssign:"المنسّق حدّد لكم القضية:",bannerOpen:"افتحها",bannerLocked:"(باقي القضايا مقفولة)",
+  bannerDone:"خلّصتوا القضية المحددة. استنوا القضية الجاية من المنسّق.",
+  toastMsg:"رسالة من المنسّق",toastAssign:"المنسّق حدّد لكم قضية",lockedOthers:"الباقي مقفول",
   endedT:"المنسّق أنهى الغرفة",endedP:"شكراً على المشاركة!",
-  offline:"غير متصل",online:"متصل",verWarn:"نسخة اللعبة عندك مختلفة عن نسخة المنسّق. حدّث الصفحة (Ctrl+F5).",
-  gate:"غرفة مباشرة",gateSub:"أنشئ غرفة، اديها كود للفرق، وتابع تقدّمهم لايف.",
+  offline:"غير متصل",verWarn:"نسخة اللعبة عندك مختلفة عن نسخة المنسّق. حدّث الصفحة (Ctrl+F5).",
+  helpBtn:"🖐 مساعدة",helpOn:"✓ اتبعت للمنسّق",helpHint:"دوس تاني لو مش محتاج",
+  gate:"غرفة مباشرة",gateSub:"أنشئ غرفة، اديها كود للفرق، ووزّع القضايا وتابع تقدّمهم لايف.",
   gateLive:"غرفة شغّالة: ",gateNone:"لسه مفيش غرفة",tab:"غرفة مباشرة",
-  hostT:"الغرفة المباشرة",hostNew:"إنشاء غرفة جديدة",hostName:"اسم الجلسة (اختياري)",
-  hostCreate:"إنشاء الغرفة",hostPing:"فحص الاتصال",
+  hostT:"الغرفة المباشرة",hostName:"اسم الجلسة (اختياري)",hostCreate:"إنشاء الغرفة",hostPing:"فحص الاتصال",
   modeLocal:"وضع تجريبي محلي: الغرفة هتشتغل على نفس الجهاز والمتصفح بس. لازم تحط إعدادات Firebase في الملف عشان الفرق تدخل من أجهزتها.",
   modeFire:"متصل بـ Firebase",pingOk:"الاتصال سليم ✓",pingBad:"فشل الاتصال: ",
   codeL:"كود الدخول",copyCode:"نسخ الكود",copyLink:"نسخ رابط الدخول",copied:"اتنسخ ✓",
-  sTeams:"فرق",sOnline:"متصلة",sPlaying:"بتحقّق",sSolved:"خلّصت قضية",sHelp:"ممكن تحتاج مساعدة",
-  announce:"رسالة للكل",annPh:"مثال: باقي ١٠ دقايق…",send:"إرسال",
-  assign:"قضية للكل",assignNone:"— اختار قضية —",assignSend:"أرسل",assignClear:"إلغاء",
-  showBoard:"عرض الترتيب للاعبين",lockJoin:"قفل الدخول",endRoom:"إنهاء الغرفة",endQ:"تنهي الغرفة؟ الفرق هتشوف إن الجلسة خلصت.",
+  sTeams:"فرق",sOnline:"متصلة",sPlaying:"بتحقّق",sSolved:"خلّصت قضية",sHelp:"ممكن تحتاج مساعدة",sReq:"طلبات دخول",
+  jmLabel:"الدخول للغرفة",jmOpen:"مفتوح",jmApproval:"بموافقتي",jmLocked:"مقفول",
+  jmOpenH:"أي حد معاه الكود يدخل فوراً",jmApprovalH:"كل فريق جديد بيستنى موافقتك",jmLockedH:"محدش جديد يدخل",
+  pendT:"طلبات الدخول",pendNone:"مفيش طلبات دلوقتي.",approve:"قبول",reject:"رفض",approveAll:"قبول الكل",
+  ago:"من",secs:"ث",mobile:"موبايل",desktop:"كمبيوتر",toastReq:"طلب دخول جديد",toastHelp:"طلب مساعدة",
+  showBoard:"عرض الترتيب للاعبين",endRoom:"إنهاء الغرفة",endQ:"تنهي الغرفة؟ الفرق هتشوف إن الجلسة خلصت.",
   delRoom:"حذف الغرفة نهائياً",delQ:"تحذف الغرفة وكل بياناتها؟",leaveHost:"خروج من لوحة الغرفة",
   noTeams:"لسه مفيش فرق دخلت. شاركهم الكود أو الرابط.",
-  tcCase:"القضية",tcDocs:"الأوراق",tcReq:"الطلبات",tcCon:"التناقضات",tcTry:"محاولات",tcNudge:"توجيهات",
-  tcSolved:"محسومة",tcScore:"النقاط",tcHelp:"⚠ ثابت من فترة",tcRemove:"إزالة الفريق",tcRemoveQ:"تشيل الفريق ده من الغرفة؟",
-  tcOver:"زيادة",members:"المحققون",
-  endedBadge:"الغرفة منتهية",lockedBadge:"الدخول مقفول"
+  tcDocs:"الأوراق",tcReq:"الطلبات",tcCon:"التناقضات",tcTry:"محاولات",tcNudge:"توجيهات",
+  tcSolved:"محسومة",tcHelp:"⚠ ثابت من فترة",tcAssigned:"المرسل:",
+  kick:"طرد",kickT:"تطرد الفريق؟",kickBody:"• يتشال من الترتيب فوراً.<br>• تتمسح نتايجه من لوحة متابعة القضايا.<br>• جهازه بيقفل بنافذة «اتشال من الغرفة».",
+  kickAgain:"اسمح له يطلب الدخول تاني",kickConfirm:"تأكيد الطرد",
+  helpFlag:"🖐 محتاج مساعدة",helpClear:"تمام، رحت له",
+  distT:"توزيع القضايا",dDraw:"🎲 قرعة: قضية مختلفة لكل فريق",dSame:"قضية واحدة للكل",dGroup:"قضية لمجموعة فرق",dManual:"يدوي",
+  fTier:"الصعوبة",fAllTier:"كل المستويات",fCat:"التصنيف",fAll:"الكل",fTime:"الوقت",fOpen:"مفتوح",fMin:"دقيقة أو أقل",
+  dExcl:"استبعد القضايا اللي الفريق لعبها",dLock:"الفرق تلعب القضية المحددة فقط (قفل الباقي)",
+  dSend:"إرسال للفرق",dRoll:"🎲 قرعة للمحدد",dClear:"فك التوزيع والقفل عن الكل",
+  colTeam:"الفريق",colCase:"القضية",colPlayed:"لعبوا قبل كده",colSent:"المرسل حالياً",
+  dApplyL:"عيّن للفرق المحددة",dApply:"تطبيق على المحدد",dSelN:"المحدد:",dSamePick:"القضية للكل",
+  dNoTeams:"مفيش فرق في الغرفة لسه.",dSentOk:"اتبعت لـ ",dTeams:" فريق",dNothing:"مفيش حاجة جديدة تتبعت.",
+  dPlayedWarn:"⚠ الفريق لعب القضية دي",dPoolEmpty:"الفلاتر ضيقة قوي، استخدمت كل القضايا.",dNone:"— بدون —",dCleared:"اتفكّ التوزيع.",
+  dHintDraw:"قضية مختلفة لكل فريق بعشوائية وبدون تكرار",dHintSame:"نفس القضية لكل الفرق المحددة",dHintGroup:"حدّد فرق، اختار قضية، طبّق. وكرّر لمجموعة تانية",dHintManual:"اختار لكل فريق بنفسك",
+  msgT:"رسالة للفرق",mTo:"مين يستلم؟",mAll:"الكل",mOnline:"المتصلين",mPlaying:"بيحققوا",mStuck:"الواقفين ⚠",mNotStarted:"ما بدؤوش",mDone:"خلّصوا",
+  mKindN:"عادية",mKindH:"💡 تلميح",mKindU:"🚨 عاجلة",mKindT:"⏱ تنبيه وقت",
+  mTpl1:"باقي ١٠ دقايق",mTpl2:"اتقدّموا للمنسّق",mTpl3:"راجعوا ورقة المعمل",mTpl4:"استراحة ٥ دقايق",
+  mSend:"إرسال",mCount:"هتتبعت لـ",mCountT:"فرق",mNoRcpt:"اختار فريق واحد على الأقل.",mNoText:"اكتب نص الرسالة.",mPh:"اكتب الرسالة…",
+  mLog:"آخر الرسائل",mSeen:"✓ شافها",mUnseen:"… لسه",mOk:"تمام",mUrgentT:"🚨 رسالة عاجلة من المنسّق",mHintT:"💡 تلميح من المنسّق",mTimeT:"⏱ تنبيه وقت",mSent:"اتبعتت ✓",
+  endedBadge:"الغرفة منتهية",
+  rkT:"الترتيب اللايف",rkLive:"مباشر (يشمل التقدّم الحالي)",rkOff:"رسمي (القضايا المحسومة بس)",rkHide:"إخفاء التقدّم عن الجمهور",
+  rkScreen:"📺 شاشة العرض",rkCopyScr:"نسخ رابط الشاشة",rkNew:"جديد",rkEst:"تقديري",rkPts:"نقطة",rkLeader:"🔥 تغيّر المتصدر!",rkFirst:"في المركز الأول",rkJoin:"ادخل بالكود",
+  rkNoteLive:"الترتيب المباشر بيتحرك مع تقدّم الفرق (أوراق + تناقضات). النقاط تقديرية لحد ما الفريق يحسم القضية، والفايز بيتحدد بالرسمي.",
+  rkNoteOff:"الترتيب الرسمي بيتغيّر بس لما فريق يحسم قضية.",rkLiveTag:"ترتيب مباشر · تقديري",rkOffTag:"الترتيب الرسمي",
+  tdT:"تفاصيل الفريق",tdGone:"الفريق مش موجود في الغرفة.",tdNow:"الحالة الحالية",tdTime:"الوقت",tdProg:"التقدّم",tdLate:"متأخرين عن المعدل",tdAhead:"متقدمين عن المعدل",tdOk:"ماشيين على المعدل",
+  tdProj:"نقاط متوقعة لو حسموا دلوقتي",tdRank:"الترتيب",tdOf:"من",tdEnter:"الدخول والخروج",tdJoined:"دخلوا الغرفة",tdOnline:"متصل",tdOffline:"غير متصل",tdLastSeen:"آخر ظهور",tdAgo:"قبل",
+  tdLeft:"خرجوا (انقطع الاتصال)",tdBack:"رجعوا",tdNone:"لسه مفيش",tdConsumed:"استهلكوا إيه",tdDocs:"الأوراق المقروءة",tdReqs:"الطلبات المصروفة",tdCons:"التناقضات اللي لقوها",tdHints:"التوجيهات",
+  tdAccuse:"الاتهام",tdAtt:"محاولة",tdAccused:"اتهموا",tdWith:"بالورقتين",tdNameOk:"الاسم صح",tdNameBad:"الاسم غلط",tdProofOk:"السند صح",tdProofBad:"السند غلط",tdExcl:"استبعدوا",tdExclCulprit:"ده الجاني!",
+  tdLog:"سجل النشاط (لايف)",tdHist:"تاريخهم في الغرفة",tdMsg:"✉ رسالة له",detBtn:"تفاصيل",
+  feedT:"نشاط الغرفة (دخول وخروج)",feedJoin:"دخل",feedOut:"خرج",feedBack:"رجع",feedKick:"اتشال",feedReq:"طلب دخول",feedOk:"اتقبل",feedEmpty:"مفيش نشاط لسه."
  },
  en:{
   hubBtn:"🔑 Join room",hubIn:"Room",joinT:"Join the coordinator's room",
@@ -13609,41 +13752,77 @@ const RM_T={
   errCode:"The code must be at least 5 letters or digits.",errNeedName:"Enter a team name.",
   errNoRoom:"No room with that code. Check the code.",errEnded:"This room was closed by the coordinator.",
   errLocked:"Joining is locked right now. Ask the coordinator.",errName:"That team name is taken in this room. Pick another.",
+  errBanned:"This team was removed from the room and cannot rejoin.",
   errNet:"Connection failed: ",connecting:"Connecting…",
+  waitT:"Waiting for the coordinator's approval",waitP:"Your request was sent. You will enter automatically once it is approved.",waitLong:"Still waiting… make sure the coordinator has the room panel open.",
+  rejectedT:"The coordinator declined your request.",tryAgain:"Try again",
+  kickedT:"Your team was removed from the room",kickedP:"The coordinator removed this team. Contact them if this was a mistake.",
   rank:"Your rank",pts:"pts",solvedN:"solved",boardT:"Team standings",
   boardHidden:"The coordinator is hiding standings. You only see your team.",you:"Your team",
   cTeam:"Team",cSolved:"Solved",cScore:"Score",cNow:"Now",
   stHub:"In lobby",stSetup:"Setting up",stCase:"Investigating",
-  bannerAssign:"The coordinator picked:",bannerOpen:"Open it",
-  toastMsg:"Message from the coordinator",toastAssign:"The coordinator picked a new case",
+  bannerAssign:"The coordinator assigned you:",bannerOpen:"Open it",bannerLocked:"(other cases are locked)",
+  bannerDone:"You finished the assigned case. Wait for the next one from the coordinator.",
+  toastMsg:"Message from the coordinator",toastAssign:"The coordinator assigned you a case",lockedOthers:"others locked",
   endedT:"The coordinator ended the room",endedP:"Thanks for playing!",
-  offline:"Offline",online:"Online",verWarn:"Your game version differs from the coordinator's. Reload the page (Ctrl+F5).",
-  gate:"Live room",gateSub:"Create a room, share the code with teams, and watch progress live.",
+  offline:"Offline",verWarn:"Your game version differs from the coordinator's. Reload the page (Ctrl+F5).",
+  helpBtn:"🖐 Help",helpOn:"✓ Sent to coordinator",helpHint:"Tap again to cancel",
+  gate:"Live room",gateSub:"Create a room, share the code, assign cases and watch progress live.",
   gateLive:"Room running: ",gateNone:"No room yet",tab:"Live room",
-  hostT:"Live room",hostNew:"Create a new room",hostName:"Session name (optional)",
-  hostCreate:"Create room",hostPing:"Test connection",
+  hostT:"Live room",hostName:"Session name (optional)",hostCreate:"Create room",hostPing:"Test connection",
   modeLocal:"Local demo mode: the room only works on this device/browser. Add your Firebase config to the file so teams can join from their own devices.",
   modeFire:"Connected to Firebase",pingOk:"Connection OK ✓",pingBad:"Connection failed: ",
   codeL:"Join code",copyCode:"Copy code",copyLink:"Copy join link",copied:"Copied ✓",
-  sTeams:"Teams",sOnline:"Online",sPlaying:"Investigating",sSolved:"Solved a case",sHelp:"May need help",
-  announce:"Message to all",annPh:"e.g. 10 minutes left…",send:"Send",
-  assign:"Case for everyone",assignNone:"— pick a case —",assignSend:"Send",assignClear:"Clear",
-  showBoard:"Show standings to players",lockJoin:"Lock joining",endRoom:"End room",endQ:"End the room? Teams will see the session is over.",
+  sTeams:"Teams",sOnline:"Online",sPlaying:"Investigating",sSolved:"Solved a case",sHelp:"May need help",sReq:"Join requests",
+  jmLabel:"Room access",jmOpen:"Open",jmApproval:"Approval",jmLocked:"Locked",
+  jmOpenH:"Anyone with the code joins instantly",jmApprovalH:"Each new team waits for your approval",jmLockedH:"No new teams",
+  pendT:"Join requests",pendNone:"No requests right now.",approve:"Approve",reject:"Decline",approveAll:"Approve all",
+  ago:"for",secs:"s",mobile:"mobile",desktop:"computer",toastReq:"New join request",toastHelp:"Help request",
+  showBoard:"Show standings to players",endRoom:"End room",endQ:"End the room? Teams will see the session is over.",
   delRoom:"Delete room permanently",delQ:"Delete the room and all its data?",leaveHost:"Leave room panel",
   noTeams:"No teams yet. Share the code or the link.",
-  tcCase:"Case",tcDocs:"Papers",tcReq:"Requests",tcCon:"Contradictions",tcTry:"Attempts",tcNudge:"Hints",
-  tcSolved:"Solved",tcScore:"Score",tcHelp:"⚠ stalled a while",tcRemove:"Remove team",tcRemoveQ:"Remove this team from the room?",
-  tcOver:"over",members:"Investigators",
-  endedBadge:"Room ended",lockedBadge:"Joining locked"
+  tcDocs:"Papers",tcReq:"Requests",tcCon:"Contradictions",tcTry:"Attempts",tcNudge:"Hints",
+  tcSolved:"Solved",tcHelp:"⚠ stalled a while",tcAssigned:"Sent:",
+  kick:"Remove",kickT:"Remove this team?",kickBody:"• Removed from the standings immediately.<br>• Their results are deleted from the results board.<br>• Their device shows a «removed from the room» message.",
+  kickAgain:"Allow them to request entry again",kickConfirm:"Confirm removal",
+  helpFlag:"🖐 Needs help",helpClear:"Done, I helped them",
+  distT:"Case assignment",dDraw:"🎲 Draw: a different case per team",dSame:"One case for everyone",dGroup:"One case for a group of teams",dManual:"Manual",
+  fTier:"Difficulty",fAllTier:"All levels",fCat:"Category",fAll:"All",fTime:"Time",fOpen:"Any",fMin:"min or less",
+  dExcl:"Skip cases the team already played",dLock:"Teams play only the assigned case (lock the rest)",
+  dSend:"Send to teams",dRoll:"🎲 Draw for selected",dClear:"Clear assignments and locks for all",
+  colTeam:"Team",colCase:"Case",colPlayed:"Played before",colSent:"Currently sent",
+  dApplyL:"Assign to selected teams",dApply:"Apply to selected",dSelN:"Selected:",dSamePick:"Case for all",
+  dNoTeams:"No teams in the room yet.",dSentOk:"Sent to ",dTeams:" team(s)",dNothing:"Nothing new to send.",
+  dPlayedWarn:"⚠ This team already played this case",dPoolEmpty:"Filters are too tight, used all cases.",dNone:"— none —",dCleared:"Assignments cleared.",
+  dHintDraw:"A different random case per team, no repeats",dHintSame:"The same case for all selected teams",dHintGroup:"Select teams, pick a case, apply. Repeat for another group",dHintManual:"Pick a case for each team yourself",
+  msgT:"Message to teams",mTo:"Who receives it?",mAll:"Everyone",mOnline:"Online",mPlaying:"Investigating",mStuck:"Stalled ⚠",mNotStarted:"Not started",mDone:"Finished",
+  mKindN:"Normal",mKindH:"💡 Hint",mKindU:"🚨 Urgent",mKindT:"⏱ Time alert",
+  mTpl1:"10 minutes left",mTpl2:"Come to the coordinator",mTpl3:"Review the lab report",mTpl4:"5 minute break",
+  mSend:"Send",mCount:"Goes to",mCountT:"teams",mNoRcpt:"Pick at least one team.",mNoText:"Write the message.",mPh:"Write the message…",
+  mLog:"Recent messages",mSeen:"✓ seen",mUnseen:"… not yet",mOk:"OK",mUrgentT:"🚨 Urgent message from the coordinator",mHintT:"💡 Hint from the coordinator",mTimeT:"⏱ Time alert",mSent:"Sent ✓",
+  endedBadge:"Room ended",
+  rkT:"Live standings",rkLive:"Live (includes current progress)",rkOff:"Official (solved cases only)",rkHide:"Hide progress from the audience",
+  rkScreen:"📺 Display screen",rkCopyScr:"Copy screen link",rkNew:"New",rkEst:"est.",rkPts:"pts",rkLeader:"🔥 New leader!",rkFirst:"is now first",rkJoin:"Join with code",
+  rkNoteLive:"Live ranking moves with team progress (papers + contradictions). Points are estimates until a team closes the case; the winner is decided by the official ranking.",
+  rkNoteOff:"Official ranking only changes when a team closes a case.",rkLiveTag:"Live ranking · estimated",rkOffTag:"Official ranking",
+  tdT:"Team details",tdGone:"This team is no longer in the room.",tdNow:"Current status",tdTime:"Time",tdProg:"Progress",tdLate:"Behind the expected pace",tdAhead:"Ahead of the expected pace",tdOk:"On pace",
+  tdProj:"Projected points if they close now",tdRank:"Rank",tdOf:"of",tdEnter:"Entry and exit",tdJoined:"Joined the room",tdOnline:"Online",tdOffline:"Offline",tdLastSeen:"Last seen",tdAgo:"",
+  tdLeft:"Left (connection lost)",tdBack:"Came back",tdNone:"Nothing yet",tdConsumed:"What they used",tdDocs:"Papers read",tdReqs:"Requests used",tdCons:"Contradictions found",tdHints:"Hints",
+  tdAccuse:"Accusations",tdAtt:"Attempt",tdAccused:"Accused",tdWith:"with",tdNameOk:"Name right",tdNameBad:"Name wrong",tdProofOk:"Proof right",tdProofBad:"Proof wrong",tdExcl:"Excluded",tdExclCulprit:"that is the culprit!",
+  tdLog:"Activity log (live)",tdHist:"History in this room",tdMsg:"✉ Message",detBtn:"Details",
+  feedT:"Room activity (entry and exit)",feedJoin:"Joined",feedOut:"Left",feedBack:"Back",feedKick:"Removed",feedReq:"Join request",feedOk:"Approved",feedEmpty:"No activity yet."
  }
 };
-function rt(k){const d=RM_T[LANG==="en"?"en":"ar"];return d[k]!==undefined?d[k]:(RM_T.ar[k]||k);}
+function rt(k){const d=RM_T[LANG==="en"?"en":"ar"];return d[k]!==undefined?d[k]:(RM_T.ar[k]!==undefined?RM_T.ar[k]:k);}
 function rmEsc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
 function rmSan(v){return v===undefined?null:JSON.parse(JSON.stringify(v));}
 function rmRand(n){const a="abcdefghijklmnopqrstuvwxyz0123456789";let s="";for(let i=0;i<n;i++)s+=a[Math.floor(Math.random()*a.length)];return s;}
 function rmGenCode(){const a="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let s="";for(let i=0;i<5;i++)s+=a[Math.floor(Math.random()*a.length)];return s;}
 function rmErr(key,extra){const e=new Error(rt(key)+(extra||""));e.rmKey=key;return e;}
 function rmFmt(sec){sec=Math.max(0,Math.floor(sec));return N(Math.floor(sec/60))+":"+N(String(sec%60).padStart(2,"0"));}
+function rmShuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function rmDevice(){try{return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)?"mobile":"desktop";}catch(e){return "desktop";}}
+function rmArr(v){return Array.isArray(v)?v:(v&&typeof v==="object"?Object.keys(v).map(function(k){return v[k];}):[]);}
 
 /* ---------- الاتصال: محلي ---------- */
 const RM_LOCAL={
@@ -13660,15 +13839,22 @@ const RM_LOCAL={
     if(this.bc){try{this.bc.postMessage({code:c});}catch(e){}}this._fire(c);},
   exists:function(c){return Promise.resolve(!!this._read(c));},
   get:function(c,p){let v=this._read(c);(p?p.split("/"):[]).forEach(function(k){v=(v&&typeof v==="object")?v[k]:undefined;});return Promise.resolve(v===undefined?null:v);},
-  create:function(c,o){this._write(c,rmSan(o));return Promise.resolve();},
-  setPath:function(c,p,v){const r=this._read(c)||{};const ks=p.split("/");let o=r;
-    for(let i=0;i<ks.length-1;i++){if(typeof o[ks[i]]!=="object"||o[ks[i]]===null)o[ks[i]]={};o=o[ks[i]];}
-    if(v===null)delete o[ks[ks.length-1]];else o[ks[ks.length-1]]=rmSan(v);this._write(c,r);return Promise.resolve();},
-  updatePath:function(c,p,obj){const r=this._read(c)||{};let o=r;(p?p.split("/"):[]).forEach(function(k){if(typeof o[k]!=="object"||o[k]===null)o[k]={};o=o[k];});
-    Object.keys(obj).forEach(function(k){if(obj[k]===null)delete o[k];else o[k]=rmSan(obj[k]);});this._write(c,r);return Promise.resolve();},
+  /* كل تعديل = قراءة + تعديل + كتابة داخل قفل بين التابات (Web Locks) عشان مفيش كتابة تدوس على التانية */
+  _tx:function(c,fn){const self=this;
+    const exec=function(){const r=self._read(c);const nr=fn(r);self._write(c,nr);};
+    if(typeof navigator!=="undefined"&&navigator.locks&&navigator.locks.request)return navigator.locks.request("mm_room_"+c,function(){exec();});
+    exec();return Promise.resolve();},
+  create:function(c,o){const v=rmSan(o);return this._tx(c,function(){return v;});},
+  setPath:function(c,p,v){const val=v===null?null:rmSan(v);const ks=p.split("/");
+    return this._tx(c,function(r){r=r||{};let o=r;
+      for(let i=0;i<ks.length-1;i++){if(typeof o[ks[i]]!=="object"||o[ks[i]]===null)o[ks[i]]={};o=o[ks[i]];}
+      if(val===null)delete o[ks[ks.length-1]];else o[ks[ks.length-1]]=val;return r;});},
+  updatePath:function(c,p,obj){const patch=rmSan(obj);const ks=p?p.split("/"):[];
+    return this._tx(c,function(r){r=r||{};let o=r;ks.forEach(function(k){if(typeof o[k]!=="object"||o[k]===null)o[k]={};o=o[k];});
+      Object.keys(patch).forEach(function(k){if(patch[k]===null)delete o[k];else o[k]=patch[k];});return r;});},
   subscribe:function(c,cb){const self=this;(this.subs[c]=this.subs[c]||[]).push(cb);setTimeout(function(){cb(self._read(c));},0);
     return function(){self.subs[c]=(self.subs[c]||[]).filter(function(f){return f!==cb;});};},
-  remove:function(c){this._write(c,null);return Promise.resolve();}
+  remove:function(c){return this._tx(c,function(){return null;});}
 };
 /* ---------- الاتصال: Firebase Realtime Database ---------- */
 function rmLoadScript(src){return new Promise(function(res,rej){const s=document.createElement("script");s.src=src;s.onload=res;
@@ -13710,7 +13896,8 @@ function rmPing(){
 /* ---------- الجلسة ---------- */
 function rmSaveSess(){
   if(!RM.active){try{localStorage.removeItem(RM_SESS_KEY);}catch(e){}return;}
-  try{localStorage.setItem(RM_SESS_KEY,JSON.stringify({role:RM.role,code:RM.code,teamId:RM.teamId,hostKey:RM.hostKey,teamName:RM.teamName,results:RM.results}));}catch(e){}
+  const ids=Object.keys(RM.seenMsgs||{});const seen={};ids.slice(-80).forEach(function(k){seen[k]=1;});
+  try{localStorage.setItem(RM_SESS_KEY,JSON.stringify({role:RM.role,code:RM.code,teamId:RM.teamId,hostKey:RM.hostKey,teamName:RM.teamName,results:RM.results,seen:seen,assignOpened:RM.assignOpened,acc:RM.acc,joined:RM.joined}));}catch(e){}
 }
 function rmTeamIdFor(code){
   const k="mm_tid_"+code+RM_NS;let v=null;try{v=localStorage.getItem(k);}catch(e){}
@@ -13719,32 +13906,36 @@ function rmTeamIdFor(code){
 function rmStart(o){
   rmStop(true);
   RM.be=rmBE();RM.active=true;RM.role=o.role;RM.code=o.code;RM.teamId=o.teamId||null;RM.hostKey=o.hostKey||null;
-  RM.teamName=o.teamName||"";RM.results=o.results||[];RM.room=null;RM.first=true;RM.err=null;RM.lastSig="";RM.prog={};RM.ingested={};
+  RM.teamName=o.teamName||"";RM.results=o.results||[];RM.room=null;RM.first=true;RM.fresh=!!o.fresh;RM.err=null;RM.lastSig="";
+  RM.prog={};RM.ingested={};RM.seenMsgs=o.seen||{};RM.assignOpened=o.assignOpened||null;RM.seenAssign=null;RM.plan=null;RM.rcpt=null;RM.acc=o.acc||[];RM.joined=o.joined||null;RM.onl={};RM.drawerTid=null;
+  RM.distSig="";RM.msgSig="";RM.lastPend={};RM.lastHelp={};RM.kickedShown=false;RM.endedShown=false;RM.verWarned=false;
   rmSaveSess();
   RM.unsub=RM.be.subscribe(RM.code,function(room){RM.room=room;rmOnRoom();});
   RM.hb=setInterval(rmHeartbeat,8000);
+  clearInterval(RM.presT);if(RM.role==="host")RM.presT=setInterval(function(){rmPresence(RM.room);},5000);
   if(RM.role==="player")rmPush(true);
   rmPaintPill();
 }
 function rmStop(keepSess){
   if(RM.unsub){try{RM.unsub();}catch(e){}RM.unsub=null;}
-  clearInterval(RM.hb);RM.hb=null;clearInterval(RM.tick);RM.tick=null;clearTimeout(RM.pushT);
-  RM.active=false;RM.room=null;
+  clearInterval(RM.hb);RM.hb=null;clearInterval(RM.tick);RM.tick=null;clearInterval(RM.presT);RM.presT=null;clearTimeout(RM.pushT);
+  RM.active=false;RM.room=null;rmTitle(0);
   if(!keepSess){try{localStorage.removeItem(RM_SESS_KEY);}catch(e){}}
   rmPaintPill();
 }
-function rmLeave(){rmStop(false);const m=document.getElementById("rmModal");if(m)m.remove();if(S.view==="hub")hub();else if(S.view==="coord"){S.cdTab="";coord();}}
+function rmLeave(){rmStop(false);rmClose();if(S.view==="hub")hub();else if(S.view==="coord"){S.cdTab="";coord();}}
 function rmBoot(){
+  try{RM.title0=document.title;}catch(e){}
+  if(RM_SCREEN){rmScreenBoot(RM_SCREEN);return;}
   try{
     const raw=localStorage.getItem(RM_SESS_KEY);
     if(raw){const s=JSON.parse(raw);if(s&&s.code){rmBE().init().then(function(){rmStart(s);}).catch(function(e){RM.err=e;rmPaintPill();});}}
   }catch(e){}
   try{
-    const q=new URLSearchParams(location.search).get("room");
-    if(q&&!localStorage.getItem(RM_SESS_KEY)){setTimeout(function(){rmOpenJoin(q);},2200);}
+    if(RM_LINK&&!localStorage.getItem(RM_SESS_KEY)){setTimeout(function(){rmOpenJoin(RM_LINK);},2200);}
   }catch(e){}
-  if(!RM.tickBoot){RM.tickBoot=true;}
 }
+function rmTitle(n){try{document.title=(n>0?"("+n+") ":"")+(RM.title0||document.title.replace(/^\(\d+\)\s*/,""));}catch(e){}}
 
 /* ---------- الفريق: إرسال التقدّم ---------- */
 function rmMine(){
@@ -13756,11 +13947,17 @@ function rmMine(){
   RM.results.forEach(function(r){d.total+=r.score||0;d.nsolved++;d.sumSecs+=r.secs||0;d.rs[r.id]={s:r.score||0,t:r.tries||1,c:r.code||"",sec:r.secs||0};});
   if(inCase||inSetup){const c=C();d.ci=S.ci;d.cid=c.id;d.est=estOf(c);}
   if(inCase){const c=C();d.read=S.read.size;d.readN=fileKeys(c).length;d.used=S.used.size;d.maxReq=c.maxReq;
-    d.found=S.found.size;d.pairs=c.pairs.length;d.tries=S.attempts;d.nudges=S.nudges;d.start=S.t0+(RM.be.offset||0);}
+    d.found=S.found.size;d.pairs=c.pairs.length;d.tries=S.attempts;d.nudges=S.nudges;d.start=S.t0+(RM.be.offset||0);
+    d.rk=Array.from(S.read).join(",");d.uq=Array.from(S.used).join(",");d.fk=Array.from(S.found).join(",");
+    d.xo=c.people.filter(function(p){return (S.mark[p.id]||{}).out;}).map(function(p){return p.id;}).join(",");
+    d.lg=(S.log||[]).slice(-40).map(function(e){return (e.s||0)+"|"+e.k+"|"+String(e.d||"").slice(0,90);});}
+  if(RM.joined)d.jn=RM.joined;
+  if(RM.acc.length)d.ac=RM.acc.slice(-8);
   return d;
 }
+function rmBannedMe(){return !!(RM.room&&RM.room.banned&&RM.room.banned[RM.teamId]);}
 function rmPush(force){
-  if(!RM.active||RM.role!=="player"||!RM.be)return;
+  if(!RM.active||RM.role!=="player"||!RM.be||rmBannedMe())return;
   const d=rmMine();const sig=JSON.stringify(d);
   if(!force&&sig===RM.lastSig)return;
   RM.lastSig=sig;d.lastSeen=rmNow();
@@ -13770,10 +13967,22 @@ function rmPush(force){
 function rmSchedule(){if(!RM.active||RM.role!=="player")return;clearTimeout(RM.pushT);RM.pushT=setTimeout(function(){rmPush(false);},450);}
 function rmHeartbeat(){
   if(!RM.active||!RM.be)return;
-  if(RM.role==="player"){
+  if(RM.role==="player"&&!rmBannedMe()){
     rmPush(false);
     RM.be.setPath(RM.code,"teams/"+RM.teamId+"/lastSeen",rmNow()).catch(function(e){RM.err=e;rmPaintPill();});
   }
+}
+/* بيتنادى فور محاولة اتهام: بيسجّل مين اتهموا وبأنهي ورقتين وهل الاسم والسند صح */
+function rmOnAttempt(){
+  if(RM.active&&RM.role==="player"){
+    try{
+      const c=C(),pfs=Array.from(S.pickDocs),sup=SUPPORT[c.id]||[];
+      const nm=S.pickWho===c.culprit,dc=pfs.length===2&&pfs.every(function(p){return sup.indexOf(p)>=0;});
+      RM.acc.push({c:c.id,n:S.attempts,w:S.pickWho||"",d:pfs.join(","),nm:nm?1:0,dc:dc?1:0,ok:(nm&&dc)?1:0,s:elapsed()});
+      if(RM.acc.length>20)RM.acc.shift();rmSaveSess();
+    }catch(e){}
+  }
+  rmSchedule();
 }
 function rmOnSolved(r){
   if(!RM.active||RM.role!=="player")return;
@@ -13790,20 +13999,39 @@ async function rmJoin(code,name){
   if(!name)throw rmErr("errNeedName");
   const be=rmBE();
   try{await be.init();}catch(e){throw rmErr("errNet",e.message);}
-  let meta;
-  try{meta=await be.get(code,"meta");}catch(e){throw rmErr("errNet",e.message);}
-  if(!meta)throw rmErr("errNoRoom");
-  if(meta.status==="ended")throw rmErr("errEnded");
+  let meta,teams,pend,banned,approved;
   const tid=rmTeamIdFor(code);
-  const teams=(await be.get(code,"teams"))||{};
+  try{
+    meta=await be.get(code,"meta");
+    if(!meta)throw rmErr("errNoRoom");
+    if(meta.status==="ended")throw rmErr("errEnded");
+    teams=(await be.get(code,"teams"))||{};pend=(await be.get(code,"pending"))||{};
+    banned=await be.get(code,"banned/"+tid);approved=await be.get(code,"approved/"+tid);
+  }catch(e){if(e.rmKey)throw e;throw rmErr("errNet",e.message);}
   const mine=teams[tid];
-  if(!mine&&meta.status==="locked")throw rmErr("errLocked");
-  const dupe=Object.keys(teams).some(function(id){return id!==tid&&String((teams[id]||{}).name||"").trim().toLowerCase()===name.toLowerCase();});
+  const lower=name.toLowerCase();
+  const dupe=Object.keys(teams).some(function(id){return id!==tid&&String((teams[id]||{}).name||"").trim().toLowerCase()===lower;})||
+             Object.keys(pend).some(function(id){return id!==tid&&String((pend[id]||{}).name||"").trim().toLowerCase()===lower;});
   if(dupe)throw rmErr("errName");
-  S.team=name;save();
+  if(banned&&!banned.again)throw rmErr("errBanned");
+  const jm=meta.status==="locked"?"locked":(meta.join||"approval");
+  const direct=!!mine||!!approved||(jm==="open"&&!banned);
+  if(!direct){
+    if(jm==="locked")throw rmErr("errLocked");
+    await be.setPath(code,"rejected/"+tid,null);
+    await be.setPath(code,"pending/"+tid,{name:name,ts:rmNow(),dev:rmDevice()});
+    return {wait:{code:code,tid:tid,name:name}};
+  }
+  await rmFinishJoin(code,tid,name,mine);
+  return {ok:true};
+}
+async function rmFinishJoin(code,tid,name,mine){
+  const be=rmBE();
+  S.team=name;S.unlocked=CASES_LEN;save();
   const results=[];
   if(mine&&mine.rs){Object.keys(mine.rs).forEach(function(id){const x=mine.rs[id];results.push({id:id,score:x.s,tries:x.t,code:x.c,secs:x.sec});});}
-  rmStart({role:"player",code:code,teamId:tid,teamName:name,results:results});
+  try{await be.setPath(code,"banned/"+tid,null);}catch(e){}
+  rmStart({role:"player",code:code,teamId:tid,teamName:name,results:results,fresh:true,joined:(mine&&mine.jn)||rmNow()});
 }
 async function rmCreate(label){
   const be=rmBE();
@@ -13812,21 +14040,20 @@ async function rmCreate(label){
   for(let i=0;i<10;i++){const c=rmGenCode();let ex=true;try{ex=await be.exists(c);}catch(e){throw rmErr("errNet",e.message);}if(!ex){code=c;break;}}
   if(!code)throw rmErr("errNet","code");
   const hostKey=rmRand(16);
-  await be.create(code,{meta:{name:String(label||"").slice(0,60),createdAt:Date.now(),hostKey:hostKey,ver:RM_APP_VER,status:"open",showBoard:true}});
+  await be.create(code,{meta:{name:String(label||"").slice(0,60),createdAt:Date.now(),hostKey:hostKey,ver:RM_APP_VER,status:"open",join:"approval",showBoard:true}});
   rmStart({role:"host",code:code,hostKey:hostKey});
 }
-/* المنسّق: تعديلات على الغرفة */
 function rmMeta(patch){if(!RM.active||RM.role!=="host")return Promise.resolve();return RM.be.updatePath(RM.code,"meta",patch);}
 
-/* ---------- نافذة بسيطة مستقلة (مش بتعدّل شاشة اللعبة) ---------- */
-function rmModal(html,wide){
+/* ---------- نافذة بسيطة مستقلة ---------- */
+function rmModal(html,wide,noBackdropClose,cls){
   const old=document.getElementById("rmModal");if(old)old.remove();
   const m=document.createElement("div");m.id="rmModal";m.className="rm-modal";
-  m.innerHTML='<div class="rm-box'+(wide?" wide":"")+'">'+html+'</div>';
-  m.addEventListener("mousedown",function(e){if(e.target===m)m.remove();});
+  m.innerHTML='<div class="rm-box'+(wide?" wide":"")+(cls?" "+cls:"")+'">'+html+'</div>';
+  if(!noBackdropClose)m.addEventListener("mousedown",function(e){if(e.target===m)rmClose();});
   document.body.appendChild(m);return m;
 }
-function rmClose(){const m=document.getElementById("rmModal");if(m)m.remove();RM.boardOpen=false;}
+function rmClose(){const m=document.getElementById("rmModal");if(m)m.remove();RM.boardOpen=false;RM.drawerTid=null;if(RM.waitUn){try{RM.waitUn();}catch(e){}RM.waitUn=null;}}
 function rmOpenJoin(prefill){
   const m=rmModal('<div class="rm-bh">'+rt("joinT")+'</div><div class="rm-bb">'+
     '<p class="rm-hint">'+rt("joinHint")+'</p>'+
@@ -13839,45 +14066,74 @@ function rmOpenJoin(prefill){
   m.querySelector("#rmJX").onclick=rmClose;
   const run=function(){
     go.disabled=true;msg.className="rm-msg";msg.textContent=rt("connecting");
-    rmJoin(ci.value,ti.value).then(function(){rmClose();sfx("ok");if(S.view==="hub")hub();})
-      .catch(function(e){go.disabled=false;msg.className="rm-msg bad";msg.textContent=e.message||String(e);sfx("err");});
+    rmJoin(ci.value,ti.value).then(function(r){
+      if(r&&r.wait){rmShowWaiting(r.wait);return;}
+      rmClose();sfx("ok");if(S.view==="hub")hub();
+    }).catch(function(e){go.disabled=false;msg.className="rm-msg bad";msg.textContent=e.message||String(e);sfx("err");});
   };
   go.onclick=run;ti.onkeydown=ci.onkeydown=function(e){if(e.key==="Enter")run();};
   (prefill?ti:ci).focus();
 }
+function rmShowWaiting(w){
+  const be=rmBE();
+  const m=rmModal('<div class="rm-bh">'+rt("waitT")+'</div><div class="rm-bb" style="text-align:center">'+
+    '<div class="rm-spin"></div><p class="rm-bigcode">'+rmEsc(w.code)+'</p><p class="rm-hint"><b>'+rmEsc(w.name)+'</b><br>'+rt("waitP")+'</p>'+
+    '<p class="rm-hint" id="rmWL" style="display:none">'+rt("waitLong")+'</p><div id="rmWM" class="rm-msg"></div>'+
+    '<div class="rm-act" style="justify-content:center"><button class="btn ghost" id="rmWX">'+rt("cancel")+'</button></div></div>',false,true);
+  const lt=setTimeout(function(){const e=document.getElementById("rmWL");if(e)e.style.display="block";},60000);
+  const stop=function(){clearTimeout(lt);if(RM.waitUn){try{RM.waitUn();}catch(e){}RM.waitUn=null;}};
+  RM.waitUn=be.subscribe(w.code,function(room){
+    if(!room||!room.meta){stop();const x=document.getElementById("rmWM");if(x){x.className="rm-msg bad";x.textContent=rt("errNoRoom");}return;}
+    if(room.meta.status==="ended"){stop();const x=document.getElementById("rmWM");if(x){x.className="rm-msg bad";x.textContent=rt("errEnded");}return;}
+    if(room.approved&&room.approved[w.tid]){
+      stop();rmFinishJoin(w.code,w.tid,w.name,null).then(function(){rmClose();sfx("ok");if(S.view==="hub")hub();});
+    }else if(room.rejected&&room.rejected[w.tid]){
+      stop();const b=document.querySelector("#rmModal .rm-bb");
+      if(b)b.innerHTML='<p class="rm-msg bad" style="font-size:16px">'+rt("rejectedT")+'</p><div class="rm-act" style="justify-content:center"><button class="btn" id="rmAg">'+rt("tryAgain")+'</button><button class="btn ghost" id="rmCl">'+rt("close")+'</button></div>';
+      const a=document.getElementById("rmAg");if(a)a.onclick=function(){rmOpenJoin(w.code);};
+      const c=document.getElementById("rmCl");if(c)c.onclick=rmClose;
+    }
+  });
+  m.querySelector("#rmWX").onclick=function(){stop();be.setPath(w.code,"pending/"+w.tid,null).catch(function(){});rmClose();};
+}
 
 /* ---------- شريط الغرفة عند الفريق + الترتيب ---------- */
-function rmRanked(room){
-  const teams=(room&&room.teams)||{};
-  return Object.keys(teams).map(function(id){return Object.assign({id:id},teams[id]);})
-    .sort(function(a,b){return (b.total||0)-(a.total||0)||(b.nsolved||0)-(a.nsolved||0)||(a.sumSecs||0)-(b.sumSecs||0)||String(a.name).localeCompare(String(b.name));});
-}
+function rmVisible(room){const b=(room&&room.banned)||{};const t=(room&&room.teams)||{};return Object.keys(t).filter(function(id){return !b[id];});}
+function rmRanked(room,mode){return rmOrder(room,mode||rmModeOf(room));}
+function rmMeTeam(){return (RM.room&&RM.room.teams&&RM.room.teams[RM.teamId])||{};}
 function rmPaintPill(){
-  let p=document.getElementById("rmPill");
-  if(!RM.active||RM.role!=="player"){if(p)p.classList.remove("on");return;}
-  if(!p){p=document.createElement("button");p.id="rmPill";p.className="rm-pill";p.onclick=rmOpenBoard;document.body.appendChild(p);}
+  let d=document.getElementById("rmDock");
+  if(!RM.active||RM.role!=="player"){if(d)d.classList.remove("on");return;}
+  if(!d){d=document.createElement("div");d.id="rmDock";d.className="rm-dock";document.body.appendChild(d);}
   const be=RM.be||rmBE();const ok=!RM.err&&be.online!==false;
   const list=rmRanked(RM.room);const show=!RM.room||!RM.room.meta||RM.room.meta.showBoard!==false;
   const idx=list.findIndex(function(x){return x.id===RM.teamId;});
   const me=idx>=0?list[idx]:null;
-  p.innerHTML='<span class="dot '+(ok?"ok":"bad")+'"></span><span>'+rt("hubIn")+' <b>'+rmEsc(RM.code)+'</b></span>'+
+  const help=!!rmMeTeam().help;
+  d.innerHTML='<button class="rm-pill" id="rmPill"><span class="dot '+(ok?"ok":"bad")+'"></span><span>'+rt("hubIn")+' <b>'+rmEsc(RM.code)+'</b></span>'+
     (me&&show?'<span class="rm-pr">#'+N(idx+1)+'/'+N(list.length)+'</span>':'')+
-    (me?'<span class="rm-pp">'+N(me.total||0)+' '+rt("pts")+'</span>':'')+
-    (ok?'':'<span class="rm-pe">'+rt("offline")+'</span>');
-  p.classList.add("on");
+    (me?'<span class="rm-pp">'+N(rmScoreOf(me,rmModeOf(RM.room)))+' '+rt("pts")+'</span>':'')+
+    (ok?'':'<span class="rm-pe">'+rt("offline")+'</span>')+'</button>'+
+    '<button class="rm-help'+(help?" on":"")+'" id="rmHelpB" title="'+rt("helpHint")+'">'+(help?rt("helpOn"):rt("helpBtn"))+'</button>';
+  d.classList.add("on");
+  document.getElementById("rmPill").onclick=rmOpenBoard;
+  document.getElementById("rmHelpB").onclick=rmToggleHelp;
 }
-function rmStatusText(t){
-  if(t.view==="case")return rt("stCase");if(t.view==="setup")return rt("stSetup");return rt("stHub");
+function rmToggleHelp(){
+  if(!RM.active||RM.role!=="player")return;
+  const on=!!rmMeTeam().help;
+  RM.be.setPath(RM.code,"teams/"+RM.teamId+"/help",on?null:rmNow()).catch(function(e){RM.err=e;rmPaintPill();});
 }
+function rmStatusText(t){if(t.view==="case")return rt("stCase");if(t.view==="setup")return rt("stSetup");return rt("stHub");}
 function rmBoardHTML(){
   const room=RM.room||{},meta=room.meta||{},list=rmRanked(room);
   const show=meta.showBoard!==false;
   let rows=list;if(!show)rows=list.filter(function(x){return x.id===RM.teamId;});
-  const body=rows.map(function(t,i){
+  const body=rows.map(function(t){
     const rk=list.findIndex(function(x){return x.id===t.id;})+1;
     const cur=t.view==="case"&&typeof t.ci==="number"?caseTitleByIdx(t.ci):rmStatusText(t);
     return '<tr class="'+(t.id===RM.teamId?"me":"")+'"><td class="rk">'+(show?N(rk):"•")+'</td><td class="tn">'+rmEsc(t.name)+(t.id===RM.teamId?' <i>('+rt("you")+')</i>':'')+'</td>'+
-      '<td>'+N(t.nsolved||0)+'</td><td><b>'+N(t.total||0)+'</b></td><td class="cn">'+rmEsc(cur)+'</td></tr>';
+      '<td>'+N(t.nsolved||0)+'</td><td><b>'+N(rmScoreOf(t,rmModeOf(room)))+'</b></td><td class="cn">'+rmEsc(cur)+'</td></tr>';
   }).join("");
   return '<div class="rm-bh">'+rt("boardT")+' · <span class="rm-bcode">'+rmEsc(RM.code)+'</span></div><div class="rm-bb">'+
     (show?'':'<p class="rm-hint">'+rt("boardHidden")+'</p>')+
@@ -13892,14 +14148,17 @@ function rmWireBoard(m){
   const x=m.querySelector("#rmBX");if(x)x.onclick=rmClose;
   const l=m.querySelector("#rmLv");if(l)l.onclick=function(){if(confirm(rt("leaveQ")))rmLeave();};
 }
-function rmToast(text,title){
+function rmToast(text,title,cls){
   let t=document.getElementById("rmToast");if(t)t.remove();
-  t=document.createElement("div");t.id="rmToast";t.className="rm-toast";
+  t=document.createElement("div");t.id="rmToast";t.className="rm-toast"+(cls?" "+cls:"");
   t.innerHTML='<b>'+rmEsc(title||"")+'</b><span>'+rmEsc(text||"")+'</span>';
   t.onclick=function(){t.remove();};document.body.appendChild(t);
   try{sfx("ring");}catch(e){}
   setTimeout(function(){if(t.parentNode)t.remove();},12000);
 }
+/* ---- تحديد القضية عند الفريق ---- */
+function rmMyAssign(){const a=rmMeTeam().assign;return (RM.active&&RM.role==="player"&&a&&typeof a.idx==="number"&&AR_CASES[a.idx])?a:null;}
+function rmCaseLocked(i){const a=rmMyAssign();return !!(a&&a.lock&&AR_CASES[i]&&AR_CASES[i].id!==a.id);}
 function rmHubBtn(){
   if(RM.active&&RM.role==="player")return '<button class="btn ghost" id="rmHubBtn" style="color:#C7BEA9;box-shadow:inset 0 0 0 1.5px #6B6459">'+rt("hubIn")+' '+rmEsc(RM.code)+'</button>';
   return '<button class="btn ghost" id="rmHubBtn" style="color:#C7BEA9;box-shadow:inset 0 0 0 1.5px #6B6459">'+rt("hubBtn")+'</button>';
@@ -13911,52 +14170,116 @@ function rmAfterHub(){
 }
 function rmPaintBanner(){
   const el=document.getElementById("rmBanner");if(!el)return;
-  const meta=(RM.room&&RM.room.meta)||{};const a=meta.assign;
-  if(!RM.active||RM.role!=="player"||!a||RM.assignDismissed===a.ts||typeof a.idx!=="number"||!AR_CASES[a.idx]){el.innerHTML="";return;}
-  el.innerHTML='<div class="rm-banner"><span>'+rt("bannerAssign")+' <b>'+rmEsc(caseTitleByIdx(a.idx))+'</b></span><button class="btn" id="rmBanGo">'+rt("bannerOpen")+'</button></div>';
+  const a=rmMyAssign();
+  if(!a){el.innerHTML="";return;}
+  const done=RM.results.some(function(r){return r.id===a.id;});
+  if(done&&a.lock){el.innerHTML='<div class="rm-banner"><span>'+rt("bannerDone")+'</span></div>';return;}
+  if(done){el.innerHTML="";return;}
+  el.innerHTML='<div class="rm-banner"><span>'+rt("bannerAssign")+' <b>'+rmEsc(caseTitleByIdx(a.idx))+'</b> '+(a.lock?'<small>'+rt("bannerLocked")+'</small>':'')+'</span><button class="btn" id="rmBanGo">'+rt("bannerOpen")+'</button></div>';
   const g=document.getElementById("rmBanGo");
-  if(g)g.onclick=function(){RM.assignDismissed=a.ts;setup(a.idx);};
+  if(g)g.onclick=function(){RM.assignOpened=a.ts;rmSaveSess();setup(a.idx);};
 }
 
 /* ---------- أحداث الغرفة ---------- */
 function rmOnRoom(){
   const room=RM.room;
   if(!room||!room.meta){
-    if(RM.active&&!RM.first){ /* الغرفة اتحذفت */
+    if(RM.active&&!RM.first){
       const wasPlayer=RM.role==="player";rmStop(false);
       if(wasPlayer){rmModal('<div class="rm-bh">'+rt("endedT")+'</div><div class="rm-bb"><p class="rm-hint">'+rt("endedP")+'</p><div class="rm-act"><button class="btn" id="rmBX">'+rt("close")+'</button></div></div>').querySelector("#rmBX").onclick=rmClose;}
     }
     RM.first=false;return;
   }
-  const meta=room.meta;
-  if(RM.role==="host")rmIngest(room);
-  if(RM.role==="player"){
-    if(meta.ver&&meta.ver!==RM_APP_VER&&!RM.verWarned){RM.verWarned=true;rmToast(rt("verWarn"),"!");}
-    const msg=meta.msg,as=meta.assign;
-    if(RM.first){RM.seenMsg=msg?msg.id:null;RM.seenAssign=as?as.ts:null;}
-    else{
-      if(msg&&msg.id!==RM.seenMsg){RM.seenMsg=msg.id;rmToast(msg.text,rt("toastMsg"));}
-      if(as&&as.ts!==RM.seenAssign){RM.seenAssign=as.ts;rmToast(caseTitleByIdx(as.idx),rt("toastAssign"));}
-    }
-    if(meta.status==="ended"&&!RM.endedShown){
-      RM.endedShown=true;
-      const list=rmRanked(room);const idx=list.findIndex(function(x){return x.id===RM.teamId;});
-      const me=idx>=0?list[idx]:null;
-      const m=rmModal('<div class="rm-bh">'+rt("endedT")+'</div><div class="rm-bb">'+
-        (me?'<p class="rm-bigrank">#'+N(idx+1)+'</p><p class="rm-hint">'+rmEsc(me.name)+' · '+N(me.total||0)+' '+rt("pts")+' · '+N(me.nsolved||0)+' '+rt("solvedN")+'</p>':'')+
-        '<p class="rm-hint">'+rt("endedP")+'</p><div class="rm-act"><button class="btn" id="rmBX">'+rt("leave")+'</button></div></div>');
-      m.querySelector("#rmBX").onclick=function(){rmLeave();};
-    }
-    if(RM.boardOpen){const m=document.getElementById("rmModal");if(m){m.firstChild.innerHTML=rmBoardHTML();rmWireBoard(m);}}
-    rmPaintBanner();rmPaintPill();
-  }
-  if(RM.role==="host")rmPaintHost();
+  if(RM.role==="host"){rmIngest(room);rmHostWatch(room);rmPaintHost();}
+  else if(RM.role==="player")rmPlayerWatch(room);
   RM.first=false;
 }
-/* المنسّق: أي فريق خلّص قضية، كوده يتضاف تلقائياً في لوحة النتائج التفصيلية */
-function rmIngest(room){
-  const teams=room.teams||{};let changed=false;
+function rmKicked(){
+  if(RM.kickedShown)return;RM.kickedShown=true;
+  rmStop(false);
+  const m=rmModal('<div class="rm-bh">'+rt("kickedT")+'</div><div class="rm-bb"><p class="rm-hint">'+rt("kickedP")+'</p><div class="rm-act"><button class="btn" id="rmBX">'+rt("close")+'</button></div></div>',false,true);
+  m.querySelector("#rmBX").onclick=function(){rmClose();RM.kickedShown=false;if(S.view==="hub")hub();};
+}
+function rmPlayerWatch(room){
+  const meta=room.meta;
+  if(room.banned&&room.banned[RM.teamId]){rmKicked();return;}
+  if(meta.ver&&meta.ver!==RM_APP_VER&&!RM.verWarned){RM.verWarned=true;rmToast(rt("verWarn"),"!");}
+  /* رسائل موجّهة */
+  rmCheckMsgs(room);
+  /* قضية محددة */
+  const me=(room.teams&&room.teams[RM.teamId])||{};const as=me.assign;
+  if(RM.first){RM.seenAssign=as?as.ts:null;}
+  else if(as&&as.ts!==RM.seenAssign){RM.seenAssign=as.ts;
+    rmToast(caseTitleByIdx(as.idx)+(as.lock?" — "+rt("lockedOthers"):""),rt("toastAssign"));
+    if(S.view==="hub")hub();}
+  else if(!as&&RM.seenAssign){RM.seenAssign=null;if(S.view==="hub")hub();}
+  if(meta.status==="ended"&&!RM.endedShown){
+    RM.endedShown=true;
+    const list=rmRanked(room,"official");const idx=list.findIndex(function(x){return x.id===RM.teamId;});
+    const mt=idx>=0?list[idx]:null;
+    const m=rmModal('<div class="rm-bh">'+rt("endedT")+'</div><div class="rm-bb">'+
+      (mt?'<p class="rm-bigrank">#'+N(idx+1)+'</p><p class="rm-hint">'+rmEsc(mt.name)+' · '+N(mt.total||0)+' '+rt("pts")+' · '+N(mt.nsolved||0)+' '+rt("solvedN")+'</p>':'')+
+      '<p class="rm-hint">'+rt("endedP")+'</p><div class="rm-act"><button class="btn" id="rmBX">'+rt("leave")+'</button></div></div>');
+    m.querySelector("#rmBX").onclick=function(){rmLeave();};
+  }
+  if(RM.boardOpen){const m=document.getElementById("rmModal");if(m&&m.firstChild){m.firstChild.innerHTML=rmBoardHTML();rmWireBoard(m);}}
+  rmPaintBanner();rmPaintPill();
+}
+function rmCheckMsgs(room){
+  const msgs=room.msgs||{};
+  const ids=Object.keys(msgs).sort(function(a,b){return (msgs[a].ts||0)-(msgs[b].ts||0);});
+  let changed=false;
+  ids.forEach(function(id){
+    if(RM.seenMsgs[id])return;
+    RM.seenMsgs[id]=1;changed=true;
+    if(RM.first&&RM.fresh)return;
+    const m=msgs[id];
+    const mine=m.to==="all"||(m.to&&typeof m.to==="object"&&m.to[RM.teamId]);
+    if(!mine)return;
+    rmShowMsg(id,m);
+  });
+  if(changed)rmSaveSess();
+}
+function rmAck(id){RM.be.setPath(RM.code,"acks/"+id+"/"+RM.teamId,rmNow()).catch(function(){});}
+function rmShowMsg(id,m){
+  const k=m.k||"n";
+  if(k==="u"){
+    try{sfx("ring");}catch(e){}
+    const mm=rmModal('<div class="rm-bh rm-urgent">'+rt("mUrgentT")+'</div><div class="rm-bb"><p class="rm-msgtxt">'+rmEsc(m.text)+'</p><div class="rm-act"><button class="btn" id="rmUOk">'+rt("mOk")+'</button></div></div>',false,true);
+    mm.querySelector("#rmUOk").onclick=function(){rmAck(id);rmClose();};
+    return;
+  }
+  const title=k==="h"?rt("mHintT"):(k==="t"?rt("mTimeT"):rt("toastMsg"));
+  rmToast(m.text,title,k==="h"?"hint":"");
+  rmAck(id);
+}
+
+/* ---------- المنسّق: مراقبة الغرفة ---------- */
+function rmHostWatch(room){
+  const banned=room.banned||{},teams=room.teams||{},pend=room.pending||{};
   Object.keys(teams).forEach(function(id){
+    if(banned[id]&&!RM.cleaning[id]){RM.cleaning[id]=1;
+      RM.be.setPath(RM.code,"teams/"+id,null).then(function(){delete RM.cleaning[id];},function(){delete RM.cleaning[id];});}
+  });
+  let fresh=0,nm="";
+  Object.keys(pend).forEach(function(id){if(!RM.lastPend[id]){RM.lastPend[id]=1;if(!RM.first){fresh++;nm=pend[id].name;}}});
+  Object.keys(RM.lastPend).forEach(function(id){if(!pend[id])delete RM.lastPend[id];});
+  let helps=0,hn="";
+  Object.keys(teams).forEach(function(id){
+    const h=teams[id]&&teams[id].help;
+    if(h&&!banned[id]){if(RM.lastHelp[id]!==h){RM.lastHelp[id]=h;if(!RM.first){helps++;hn=teams[id].name;}}}
+    else delete RM.lastHelp[id];
+  });
+  if(fresh)rmToast(nm,rt("toastReq"));
+  else if(helps)rmToast(hn,rt("toastHelp"),"hint");
+  let n=Object.keys(pend).length;
+  Object.keys(teams).forEach(function(id){if(teams[id]&&teams[id].help&&!banned[id])n++;});
+  rmTitle(n);
+}
+function rmIngest(room){
+  const teams=room.teams||{},banned=room.banned||{};
+  Object.keys(teams).forEach(function(id){
+    if(banned[id])return;
     const t=teams[id]||{};const rs=t.rs||{};
     Object.keys(rs).forEach(function(cid){
       const cd=rs[cid]&&rs[cid].c;if(!cd||RM.ingested[cd])return;RM.ingested[cd]=1;
@@ -13964,11 +14287,36 @@ function rmIngest(room){
         const o=readCode(cd);if(!o)return;const key=makeCode(o);
         const all=coordLoad();
         if(all.some(function(r){return r.code===key;}))return;
-        o.team=t.name||t.id;o.code=key;all.push(o);coordSave(all);changed=true;
+        o.team=t.name||t.id;o.code=key;all.push(o);coordSave(all);
       }catch(e){}
     });
   });
-  return changed;
+}
+function rmApprove(tid){
+  const p=((RM.room||{}).pending||{})[tid];if(!p)return Promise.resolve();
+  return Promise.all([RM.be.setPath(RM.code,"approved/"+tid,{name:p.name,ts:rmNow()}),RM.be.setPath(RM.code,"pending/"+tid,null),RM.be.setPath(RM.code,"banned/"+tid,null)]);
+}
+function rmReject(tid){return Promise.all([RM.be.setPath(RM.code,"rejected/"+tid,rmNow()),RM.be.setPath(RM.code,"pending/"+tid,null)]);}
+function rmKick(tid,again){
+  const room=RM.room||{},t=(room.teams||{})[tid]||{},pd=(room.pending||{})[tid]||{};
+  const nm=t.name||pd.name||tid;
+  /* امسح نتايجه من لوحة المتابعة */
+  try{
+    const keys={};
+    Object.keys(t.rs||{}).forEach(function(k){const cd=t.rs[k]&&t.rs[k].c;if(cd){try{const o=readCode(cd);if(o)keys[makeCode(o)]=1;}catch(e){}}});
+    if(Object.keys(keys).length)coordSave(coordLoad().filter(function(r){return !keys[r.code];}));
+  }catch(e){}
+  return Promise.all([
+    RM.be.setPath(RM.code,"banned/"+tid,{name:nm,ts:rmNow(),again:again?1:0}),
+    RM.be.setPath(RM.code,"teams/"+tid,null),RM.be.setPath(RM.code,"approved/"+tid,null),RM.be.setPath(RM.code,"pending/"+tid,null)]);
+}
+function rmAskKick(tid){
+  const t=((RM.room||{}).teams||{})[tid]||{};
+  const m=rmModal('<div class="rm-bh">'+rt("kickT")+' <span class="rm-bcode">'+rmEsc(t.name||"")+'</span></div><div class="rm-bb"><p class="rm-hint">'+rt("kickBody")+'</p>'+
+    '<label class="rm-chk dkb"><input type="checkbox" id="rmKA"> '+rt("kickAgain")+'</label>'+
+    '<div class="rm-act"><button class="btn" style="background:var(--blood)" id="rmKY">'+rt("kickConfirm")+'</button><button class="btn ghost" id="rmKN">'+rt("cancel")+'</button></div></div>');
+  m.querySelector("#rmKN").onclick=rmClose;
+  m.querySelector("#rmKY").onclick=function(){const again=m.querySelector("#rmKA").checked;rmClose();rmKick(tid,again).then(function(){sfx("ok");});};
 }
 
 /* ---------- لوحة المنسّق ---------- */
@@ -13980,10 +14328,11 @@ function rmGateIcon(){
    '<path d="M48 59 V84 M38 84 h20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>');
 }
 function rmLink(){try{return location.origin+location.pathname+"?room="+RM.code;}catch(e){return "?room="+RM.code;}}
+function wireCdBar(){root.querySelectorAll("[data-cdtab]").forEach(function(b){b.onclick=function(){S.cdTab=b.getAttribute("data-cdtab");coord();};});}
+function rmCopy(txt){try{navigator.clipboard.writeText(txt);}catch(e){const t=document.createElement("textarea");t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand("copy");}catch(x){}t.remove();}}
 function coordRoom(){
   S.view="coord";stopClock();window.scrollTo(0,0);
   if(!RM.active||RM.role!=="host")return rmHostStart();
-  const room=RM.room||{};
   root.innerHTML=cdBar("room")+
    '<div class="rm-host">'+
     '<div class="rm-hhead">'+
@@ -13994,15 +14343,16 @@ function coordRoom(){
       '<div class="rm-stats" id="rmStats"></div>'+
     '</div>'+
     ((rmBE().name==="local")?'<div class="rm-warn">'+rt("modeLocal")+'</div>':'')+
-    '<div class="rm-tools">'+
-      '<div class="rm-tool"><label>'+rt("announce")+'</label><div class="rm-row"><input id="rmAnn" class="rm-in dk" maxlength="140" placeholder="'+rt("annPh")+'"><button class="rm-sm gold" id="rmAnnGo">'+rt("send")+'</button></div></div>'+
-      '<div class="rm-tool"><label>'+rt("assign")+'</label><div class="rm-row"><select id="rmAsn" class="rm-in dk"><option value="">'+rt("assignNone")+'</option>'+
-        AR_CASES.map(function(c,i){return '<option value="'+i+'">'+N(i+1)+' · '+rmEsc(caseTitleByIdx(i))+'</option>';}).join("")+
-        '</select><button class="rm-sm gold" id="rmAsnGo">'+rt("assignSend")+'</button><button class="rm-sm" id="rmAsnX">'+rt("assignClear")+'</button></div></div>'+
-      '<div class="rm-tool rm-toggles"><label class="rm-chk"><input type="checkbox" id="rmShow"> '+rt("showBoard")+'</label>'+
-        '<label class="rm-chk"><input type="checkbox" id="rmLock"> '+rt("lockJoin")+'</label>'+
-        '<span class="rm-grow"></span><button class="rm-sm" id="rmEnd">'+rt("endRoom")+'</button><button class="rm-sm bad" id="rmDel">'+rt("delRoom")+'</button><button class="rm-sm" id="rmOut">'+rt("leaveHost")+'</button></div>'+
-    '</div>'+
+    '<div class="rm-tool rm-joinrow"><span class="rm-lbl">'+rt("jmLabel")+'</span>'+
+      '<div class="rm-chips" id="rmJM">'+[["open","jmOpen","jmOpenH"],["approval","jmApproval","jmApprovalH"],["locked","jmLocked","jmLockedH"]].map(function(x){
+        return '<button class="rm-chip" data-jm="'+x[0]+'" title="'+rt(x[2])+'">'+rt(x[1])+'</button>';}).join("")+'</div>'+
+      '<span class="rm-grow"></span><label class="rm-chk"><input type="checkbox" id="rmShow"> '+rt("showBoard")+'</label></div>'+
+    '<div id="rmPend"></div>'+
+    '<details class="rm-det" id="rmRKD" open><summary>'+rt("rkT")+'</summary><div class="rm-detb" id="rmRK"></div></details>'+
+    '<details class="rm-det" id="rmDD" open><summary>'+rt("distT")+'</summary><div class="rm-detb" id="rmDist"></div></details>'+
+    '<details class="rm-det" id="rmMD"><summary>'+rt("msgT")+'</summary><div class="rm-detb" id="rmMsg"></div></details>'+
+    '<details class="rm-det" id="rmFD"><summary>'+rt("feedT")+'</summary><div class="rm-detb" id="rmFeed"></div></details>'+
+    '<div class="rm-tool rm-toggles"><span class="rm-grow"></span><button class="rm-sm" id="rmEnd">'+rt("endRoom")+'</button><button class="rm-sm bad" id="rmDel">'+rt("delRoom")+'</button><button class="rm-sm" id="rmOut">'+rt("leaveHost")+'</button></div>'+
     '<div class="rm-teams" id="rmTeams"></div>'+
    '</div>';
   wireCdBar();
@@ -14010,22 +14360,15 @@ function coordRoom(){
   const flash=function(b,txt){const o=b.textContent;b.textContent=txt;setTimeout(function(){b.textContent=o;},1400);};
   $("rmCpC").onclick=function(){rmCopy(RM.code);flash(this,rt("copied"));};
   $("rmCpL").onclick=function(){rmCopy(rmLink());flash(this,rt("copied"));};
-  $("rmAnnGo").onclick=function(){const v=$("rmAnn").value.trim();if(!v)return;rmMeta({msg:{id:rmRand(6),text:v,ts:rmNow()}});$("rmAnn").value="";flash(this,rt("copied"));};
-  $("rmAnn").onkeydown=function(e){if(e.key==="Enter")$("rmAnnGo").click();};
-  $("rmAsnGo").onclick=function(){const v=$("rmAsn").value;if(v==="")return;const i=parseInt(v,10);rmMeta({assign:{idx:i,id:AR_CASES[i].id,ts:rmNow()}});flash(this,rt("copied"));};
-  $("rmAsnX").onclick=function(){rmMeta({assign:null});$("rmAsn").value="";};
+  root.querySelectorAll("[data-jm]").forEach(function(b){b.onclick=function(){rmMeta({join:b.getAttribute("data-jm")});};});
   $("rmShow").onchange=function(){rmMeta({showBoard:this.checked});};
-  $("rmLock").onchange=function(){rmMeta({status:this.checked?"locked":"open"});};
   $("rmEnd").onclick=function(){if(confirm(rt("endQ")))rmMeta({status:"ended"});};
   $("rmDel").onclick=function(){if(confirm(rt("delQ"))){const be=RM.be,c=RM.code;be.remove(c).then(function(){rmStop(false);coordRoom();});}};
   $("rmOut").onclick=function(){rmStop(true);S.cdTab="";coord();};
+  rmDistBuild();rmMsgBuild();rmRankBuild();
   clearInterval(RM.tick);RM.tick=setInterval(rmTickHost,1000);
   paintTop();rmPaintHost();
 }
-function wireCdBar(){
-  root.querySelectorAll("[data-cdtab]").forEach(function(b){b.onclick=function(){S.cdTab=b.getAttribute("data-cdtab");coord();};});
-}
-function rmCopy(txt){try{navigator.clipboard.writeText(txt);}catch(e){const t=document.createElement("textarea");t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand("copy");}catch(x){}t.remove();}}
 function rmHostStart(){
   const be=rmBE();
   root.innerHTML=cdBar("room")+
@@ -14048,53 +14391,77 @@ function rmHostStart(){
   };
   paintTop();
 }
+function rmTeamClass(t,now){
+  const on=now-(t.lastSeen||0)<26000;const pr=RM.prog[t.id];
+  return {on:on,playing:t.view==="case",stuck:t.view==="case"&&on&&pr&&(now-pr.t)>5*60000,
+    notstarted:t.view!=="case"&&!(t.nsolved>0),done:(t.nsolved>0)&&t.view!=="case"};
+}
 function rmTeamCard(t,now){
   const online=now-(t.lastSeen||0)<26000;
   const inCase=t.view==="case";
-  const pr=RM.prog[t.id]||{t:now};
-  const stuck=inCase&&online&&(now-pr.t)>5*60000;
+  const cl=rmTeamClass(t,now);
   const bar=function(v,max,cls){const p=max?Math.max(0,Math.min(100,v/max*100)):0;return '<span class="rm-bar"><i class="'+cls+'" style="width:'+p.toFixed(0)+'%"></i></span>';};
   let timeHTML="";
   if(inCase&&t.start){const el=Math.floor((now-t.start)/1000);const over=el>(t.est||45)*60;
     timeHTML='<span class="rm-time'+(over?" over":"")+'"><b data-start="'+t.start+'" data-est="'+(t.est||45)+'">'+(over?"+":"")+rmFmt(over?el-(t.est||45)*60:el)+'</b><i> / '+N(t.est||45)+'</i></span>';}
   const caseT=(typeof t.ci==="number"&&(inCase||t.view==="setup"))?caseTitleByIdx(t.ci):rmStatusText(t);
+  const as=t.assign&&typeof t.assign.idx==="number"&&AR_CASES[t.assign.idx]?t.assign:null;
   const prog=inCase?
    '<div class="rm-bars">'+
     '<div class="rm-bl"><span>'+rt("tcDocs")+'</span><b>'+N(t.read||0)+'/'+N(t.readN||0)+'</b>'+bar(t.read||0,t.readN||0,"d")+'</div>'+
     '<div class="rm-bl"><span>'+rt("tcReq")+'</span><b>'+N(t.used||0)+'/'+N(t.maxReq||0)+'</b>'+bar(t.used||0,t.maxReq||0,"r")+'</div>'+
     '<div class="rm-bl"><span>'+rt("tcCon")+'</span><b>'+N(t.found||0)+'/'+N(t.pairs||0)+'</b>'+bar(t.found||0,t.pairs||0,"c")+'</div>'+
-    '<div class="rm-chips"><span class="rm-chip'+((t.tries||0)>0?" warn":"")+'">'+rt("tcTry")+' '+N(t.tries||0)+'</span>'+
-      ((t.nudges||0)>0?'<span class="rm-chip warn">'+rt("tcNudge")+' '+N(t.nudges)+'</span>':'')+'</div>'+
+    '<div class="rm-chips"><span class="rm-chip sm'+((t.tries||0)>0?" warn":"")+'">'+rt("tcTry")+' '+N(t.tries||0)+'</span>'+
+      ((t.nudges||0)>0?'<span class="rm-chip sm warn">'+rt("tcNudge")+' '+N(t.nudges)+'</span>':'')+'</div>'+
    '</div>':'';
-  return '<div class="rm-tc'+(online?"":" off")+(inCase?" playing":"")+'" data-id="'+rmEsc(t.id)+'">'+
+  return '<div class="rm-tc'+(online?"":" off")+(inCase?" playing":"")+(t.help?" helpme":"")+'" data-id="'+rmEsc(t.id)+'">'+
     '<div class="rm-tch"><span class="rm-dot '+(online?"ok":"")+'"></span><b class="rm-tn">'+rmEsc(t.name||t.id)+'</b>'+
-      (stuck?'<span class="rm-flag">'+rt("tcHelp")+'</span>':'')+
-      '<button class="rm-x" data-rm="'+rmEsc(t.id)+'" title="'+rt("tcRemove")+'">✕</button></div>'+
-    ((t.members&&t.members.length)?'<div class="rm-mem">'+rmEsc((Array.isArray(t.members)?t.members:Object.keys(t.members).map(function(k){return t.members[k];})).join(" · "))+'</div>':'')+
-    '<div class="rm-tcc"><span class="rm-cs">'+rmEsc(caseT)+'</span>'+timeHTML+'</div>'+prog+
+      (cl.stuck?'<span class="rm-flag">'+rt("tcHelp")+'</span>':'')+
+      '<button class="rm-x" data-det="'+rmEsc(t.id)+'">'+rt("detBtn")+'</button><button class="rm-x" data-kick="'+rmEsc(t.id)+'" title="'+rt("kick")+'">'+rt("kick")+'</button></div>'+
+    (t.help?'<div class="rm-helpbar"><span>'+rt("helpFlag")+'</span><button class="rm-sm gold" data-hclear="'+rmEsc(t.id)+'">'+rt("helpClear")+'</button></div>':'')+
+    ((t.members&&rmArr(t.members).length)?'<div class="rm-mem">'+rmEsc(rmArr(t.members).join(" · "))+'</div>':'')+
+    '<div class="rm-tcc"><span class="rm-cs">'+rmEsc(caseT)+'</span>'+timeHTML+'</div>'+
+    (as?'<div class="rm-asg">'+rt("tcAssigned")+' <b>'+rmEsc(caseTitleByIdx(as.idx))+'</b>'+(as.lock?' 🔒':'')+'</div>':'')+prog+
     '<div class="rm-tcf"><span>'+rt("tcSolved")+' <b>'+N(t.nsolved||0)+'</b></span><span class="rm-sc">'+N(t.total||0)+' <i>'+rt("pts")+'</i></span></div>'+
   '</div>';
 }
 function rmPaintHost(){
   const box=document.getElementById("rmTeams");if(!box||RM.role!=="host")return;
   const room=RM.room||{},meta=room.meta||{},teams=room.teams||{},now=rmNow();
-  const ids=Object.keys(teams);
-  /* كشف الفرق الواقفة: بصمة تقدّمها لو ما اتغيّرتش */
+  const ids=rmVisible(room);
   ids.forEach(function(id){const t=teams[id];const sig=[t.cid,t.read,t.used,t.found,t.tries,t.view].join("|");
     const p=RM.prog[id];if(!p||p.sig!==sig)RM.prog[id]={sig:sig,t:now};});
   const list=rmRanked(room);
   let nOn=0,nPl=0,nSolved=0,nHelp=0;
-  list.forEach(function(t){const on=now-(t.lastSeen||0)<26000;if(on)nOn++;if(t.view==="case")nPl++;if((t.nsolved||0)>0)nSolved++;
-    const p=RM.prog[t.id];if(t.view==="case"&&on&&p&&(now-p.t)>5*60000)nHelp++;});
+  list.forEach(function(t){const c=rmTeamClass(t,now);if(c.on)nOn++;if(c.playing)nPl++;if((t.nsolved||0)>0)nSolved++;if(c.stuck||t.help)nHelp++;});
+  const nReq=Object.keys(room.pending||{}).length;
   const st=document.getElementById("rmStats");
-  if(st)st.innerHTML=[[ids.length,rt("sTeams")],[nOn,rt("sOnline")],[nPl,rt("sPlaying")],[nSolved,rt("sSolved")],[nHelp,rt("sHelp"),nHelp?"warn":""]]
+  if(st)st.innerHTML=[[ids.length,rt("sTeams")],[nOn,rt("sOnline")],[nPl,rt("sPlaying")],[nSolved,rt("sSolved")],[nHelp,rt("sHelp"),nHelp?"warn":""],[nReq,rt("sReq"),nReq?"warn":""]]
     .map(function(x){return '<div class="rm-stat '+(x[2]||"")+'"><b>'+N(x[0])+'</b><span>'+x[1]+'</span></div>';}).join("")+
-    (meta.status==="ended"?'<div class="rm-stat warn"><b>■</b><span>'+rt("endedBadge")+'</span></div>':(meta.status==="locked"?'<div class="rm-stat warn"><b>🔒</b><span>'+rt("lockedBadge")+'</span></div>':''));
-  const sh=document.getElementById("rmShow"),lk=document.getElementById("rmLock");
-  if(sh&&document.activeElement!==sh)sh.checked=meta.showBoard!==false;
-  if(lk&&document.activeElement!==lk)lk.checked=meta.status==="locked";
+    (meta.status==="ended"?'<div class="rm-stat warn"><b>■</b><span>'+rt("endedBadge")+'</span></div>':'');
+  const jm=meta.status==="locked"?"locked":(meta.join||"approval");
+  root.querySelectorAll("[data-jm]").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-jm")===jm);});
+  const sh=document.getElementById("rmShow");if(sh&&document.activeElement!==sh)sh.checked=meta.showBoard!==false;
+  rmPaintPending(room);
   box.innerHTML=list.length?list.map(function(t){return rmTeamCard(t,now);}).join(""):'<p class="rm-empty">'+rt("noTeams")+'</p>';
-  box.querySelectorAll("[data-rm]").forEach(function(b){b.onclick=function(){if(confirm(rt("tcRemoveQ")))RM.be.setPath(RM.code,"teams/"+b.getAttribute("data-rm"),null);};});
+  box.querySelectorAll(".rm-tc").forEach(function(c){c.onclick=function(e){if(e.target.closest("button"))return;rmOpenTeam(c.getAttribute("data-id"));};});
+  box.querySelectorAll("[data-det]").forEach(function(b){b.onclick=function(){rmOpenTeam(b.getAttribute("data-det"));};});
+  box.querySelectorAll("[data-kick]").forEach(function(b){b.onclick=function(){rmAskKick(b.getAttribute("data-kick"));};});
+  box.querySelectorAll("[data-hclear]").forEach(function(b){b.onclick=function(){RM.be.setPath(RM.code,"teams/"+b.getAttribute("data-hclear")+"/help",null);};});
+  rmDistRefresh();rmMsgRefresh();rmRankPaint(room);rmFeedPaint(room);rmPaintDrawer();
+}
+function rmPaintPending(room){
+  const el=document.getElementById("rmPend");if(!el)return;
+  const pend=room.pending||{},ids=Object.keys(pend).sort(function(a,b){return (pend[a].ts||0)-(pend[b].ts||0);});
+  if(!ids.length){el.innerHTML="";return;}
+  const now=rmNow();
+  el.innerHTML='<div class="rm-tool rm-pending"><div class="rm-row"><b>🔔 '+rt("pendT")+' ('+N(ids.length)+')</b><span class="rm-grow"></span><button class="rm-sm gold" id="rmAA">'+rt("approveAll")+'</button></div>'+
+    ids.map(function(id){const p=pend[id];const age=Math.max(0,Math.floor((now-(p.ts||now))/1000));
+      return '<div class="rm-req"><div class="rm-grow"><b>'+rmEsc(p.name)+'</b><div class="rm-mem">'+rt("ago")+' '+N(age)+rt("secs")+' · '+rt(p.dev==="mobile"?"mobile":"desktop")+'</div></div>'+
+        '<button class="rm-sm gold" data-ap="'+rmEsc(id)+'">'+rt("approve")+'</button><button class="rm-sm" data-rj="'+rmEsc(id)+'">'+rt("reject")+'</button></div>';}).join("")+'</div>';
+  el.querySelectorAll("[data-ap]").forEach(function(b){b.onclick=function(){rmApprove(b.getAttribute("data-ap"));};});
+  el.querySelectorAll("[data-rj]").forEach(function(b){b.onclick=function(){rmReject(b.getAttribute("data-rj"));};});
+  const aa=document.getElementById("rmAA");if(aa)aa.onclick=function(){ids.forEach(rmApprove);};
 }
 function rmTickHost(){
   if(!document.getElementById("rmTeams")){clearInterval(RM.tick);RM.tick=null;return;}
@@ -14105,8 +14472,510 @@ function rmTickHost(){
     b.textContent=(over?"+":"")+rmFmt(over?el-est*60:el);
     const w=b.parentNode;if(w)w.classList.toggle("over",over);
   });
-  /* تحديث حالة الاتصال كل ثانية بدون إعادة رسم */
   if((Math.floor(now/1000))%4===0)rmPaintHost();
+}
+
+/* ---------- توزيع القضايا ---------- */
+function rmTeamsList(){
+  const room=RM.room||{};
+  return rmVisible(room).map(function(id){return Object.assign({id:id},room.teams[id]);})
+    .sort(function(a,b){return String(a.name).localeCompare(String(b.name));});
+}
+function rmPlan(){
+  if(!RM.plan)RM.plan={mode:"draw",assign:{},sel:{},tier:"",cat:"",time:0,excl:true,lock:true,groupOf:{},grp:0,sameIdx:0};
+  return RM.plan;
+}
+function rmTierName(d){const r=(typeof TIERS!=="undefined"?TIERS:[]).find(function(x){return x[0]===d;});return r?(LANG==="ar"?r[1]:r[2]):"";}
+function rmCaseInfo(i){
+  const c=AR_CASES[i];if(!c)return "";
+  const cats=catsOf(c.id);
+  return '★'.repeat(Math.max(1,c.diff-2))+' '+rmTierName(c.diff)+' · '+N(estOf(c))+(LANG==="ar"?"د":"m")+(cats.length?' · '+catLabel(cats[0]):'');
+}
+function rmPlayedSet(tid){
+  const room=RM.room||{},t=(room.teams||{})[tid]||{},s={};
+  Object.keys(t.rs||{}).forEach(function(id){const i=AR_CASES.findIndex(function(c){return c.id===id;});if(i>=0)s[i]=1;});
+  const rounds=room.rounds||{};
+  Object.keys(rounds).forEach(function(k){const a=(rounds[k]||{}).a||{};if(a[tid]!=null)s[a[tid]]=1;});
+  return s;
+}
+function rmPool(){
+  const p=rmPlan();const out=[];
+  for(let i=0;i<AR_CASES.length;i++){
+    const c=AR_CASES[i];
+    if(p.tier&&String(c.diff)!==String(p.tier))continue;
+    if(p.cat&&catsOf(c.id).indexOf(p.cat)<0)continue;
+    if(p.time&&estOf(c)>p.time)continue;
+    out.push(i);
+  }
+  return out;
+}
+function rmRoll(ids){
+  const p=rmPlan();let pool=rmPool();
+  const msg=document.getElementById("dMsgT");
+  if(!pool.length){pool=AR_CASES.map(function(_,i){return i;});if(msg){msg.className="rm-msg bad";msg.textContent=rt("dPoolEmpty");}}
+  else if(msg&&msg.textContent===rt("dPoolEmpty")){msg.textContent="";}
+  ids=ids||rmTeamsList().filter(function(t){return p.sel[t.id]!==false;}).map(function(t){return t.id;});
+  if(!ids.length)return;
+  const played={};ids.forEach(function(id){played[id]=rmPlayedSet(id);});
+  if(p.mode==="same"){
+    let cand=pool.filter(function(i){return !p.excl||ids.every(function(id){return !played[id][i];});});
+    if(!cand.length)cand=pool;
+    const pick=cand[Math.floor(Math.random()*cand.length)];
+    ids.forEach(function(id){p.assign[id]=pick;});p.sameIdx=pick;
+  }else{
+    const used={};
+    Object.keys(p.assign).forEach(function(id){if(ids.indexOf(id)<0&&p.assign[id]!=null)used[p.assign[id]]=1;});
+    rmShuffle(ids).forEach(function(id){
+      let av=pool.filter(function(i){return !(p.excl&&played[id][i])&&!used[i];});
+      if(!av.length)av=pool.filter(function(i){return !(p.excl&&played[id][i]);});
+      if(!av.length)av=pool;
+      const pick=av[Math.floor(Math.random()*av.length)];
+      p.assign[id]=pick;used[pick]=1;
+    });
+  }
+}
+function rmDistBuild(){
+  const el=document.getElementById("rmDist");if(!el)return;
+  const p=rmPlan();
+  const tiers=[3,4,5].filter(function(d){return AR_CASES.some(function(c){return c.diff===d;});});
+  el.innerHTML=
+   '<div class="rm-chips" id="dModes">'+[["draw","dDraw"],["same","dSame"],["group","dGroup"],["manual","dManual"]].map(function(x){
+      return '<button class="rm-chip'+(p.mode===x[0]?" on":"")+'" data-dm="'+x[0]+'">'+rt(x[1])+'</button>';}).join("")+'</div>'+
+   '<p class="rm-hint" id="dHint"></p>'+
+   '<div class="rm-row rm-filters">'+
+    '<label>'+rt("fTier")+' <select id="dTier" class="rm-in dk sel"><option value="">'+rt("fAllTier")+'</option>'+tiers.map(function(d){return '<option value="'+d+'"'+(String(p.tier)===String(d)?" selected":"")+'>'+rmTierName(d)+'</option>';}).join("")+'</select></label>'+
+    '<label>'+rt("fCat")+' <select id="dCat" class="rm-in dk sel"><option value="">'+rt("fAll")+'</option>'+allCats().map(function(k){return '<option value="'+k+'"'+(p.cat===k?" selected":"")+'>'+catLabel(k)+'</option>';}).join("")+'</select></label>'+
+    '<label>'+rt("fTime")+' <select id="dTime" class="rm-in dk sel"><option value="0">'+rt("fOpen")+'</option>'+[35,40,45,50].map(function(m){return '<option value="'+m+'"'+(p.time===m?" selected":"")+'>'+N(m)+' '+rt("fMin")+'</option>';}).join("")+'</select></label>'+
+   '</div>'+
+   '<div class="rm-row"><label class="rm-chk"><input type="checkbox" id="dEx"'+(p.excl?" checked":"")+'> '+rt("dExcl")+'</label>'+
+    '<label class="rm-chk"><input type="checkbox" id="dLock"'+(p.lock?" checked":"")+'> '+rt("dLock")+'</label></div>'+
+   '<div class="rm-row" id="dSameRow" style="display:none"><label>'+rt("dSamePick")+' <select id="dSame" class="rm-in dk sel">'+AR_CASES.map(function(c,i){return '<option value="'+i+'">'+N(i+1)+' · '+rmEsc(caseTitleByIdx(i))+'</option>';}).join("")+'</select></label></div>'+
+   '<div class="rm-tw"><table class="rm-table dk"><thead><tr><th><input type="checkbox" id="dAll" style="accent-color:#C09A56"></th><th>'+rt("colTeam")+'</th><th>'+rt("colCase")+'</th><th>'+rt("colPlayed")+'</th><th>'+rt("colSent")+'</th><th></th></tr></thead><tbody id="dRows"></tbody></table></div>'+
+   '<div class="rm-tool" id="dGroupRow" style="display:none;margin-top:10px"><b>'+rt("dApplyL")+'</b><div class="rm-row" style="margin-top:6px"><span class="hint">'+rt("dSelN")+' <b id="dSelN">0</b></span>'+
+     '<select id="dGcase" class="rm-in dk sel">'+AR_CASES.map(function(c,i){return '<option value="'+i+'">'+N(i+1)+' · '+rmEsc(caseTitleByIdx(i))+'</option>';}).join("")+'</select><button class="rm-sm" id="dGapply">'+rt("dApply")+'</button></div></div>'+
+   '<div class="rm-row" style="margin-top:12px"><button class="rm-sm gold" id="dSend">'+rt("dSend")+'</button><button class="rm-sm" id="dRoll">'+rt("dRoll")+'</button><button class="rm-sm" id="dClr">'+rt("dClear")+'</button><span class="rm-msg" id="dMsgT"></span></div>';
+  const $=function(id){return document.getElementById(id);};
+  el.querySelectorAll("[data-dm]").forEach(function(b){b.onclick=function(){p.mode=b.getAttribute("data-dm");if(p.mode==="draw"||p.mode==="same")rmRoll();rmDistBuild();rmDistPaint();};});
+  $("dTier").onchange=function(){p.tier=this.value;};
+  $("dCat").onchange=function(){p.cat=this.value;};
+  $("dTime").onchange=function(){p.time=+this.value;};
+  $("dEx").onchange=function(){p.excl=this.checked;};
+  $("dLock").onchange=function(){p.lock=this.checked;};
+  $("dSame").onchange=function(){const v=+this.value;p.sameIdx=v;rmTeamsList().forEach(function(t){if(p.sel[t.id]!==false)p.assign[t.id]=v;});rmDistPaint();};
+  $("dAll").onchange=function(){const v=this.checked;rmTeamsList().forEach(function(t){p.sel[t.id]=v;});rmDistPaint();};
+  $("dRoll").onclick=function(){rmRoll();rmDistPaint();};
+  $("dGapply").onclick=function(){const v=+$("dGcase").value;p.grp++;rmTeamsList().forEach(function(t){if(p.sel[t.id]!==false){p.assign[t.id]=v;p.groupOf[t.id]=p.grp;}});rmDistPaint();};
+  $("dSend").onclick=rmSendPlan;
+  $("dClr").onclick=rmClearAssign;
+  $("dHint").textContent=rt({draw:"dHintDraw",same:"dHintSame",group:"dHintGroup",manual:"dHintManual"}[p.mode]);
+  $("dSameRow").style.display=p.mode==="same"?"flex":"none";
+  $("dGroupRow").style.display=p.mode==="group"?"block":"none";
+  RM.distSig="";
+}
+function rmDistRefresh(){
+  const p=rmPlan(),list=rmTeamsList(),now=rmNow();
+  list.forEach(function(t){if(p.sel[t.id]===undefined)p.sel[t.id]=true;
+    if(p.mode==="draw"&&p.assign[t.id]==null&&!(t.assign&&typeof t.assign.idx==="number"))rmRoll([t.id]);});
+  const sig=list.map(function(t){return [t.id,t.name,(now-(t.lastSeen||0)<26000)?1:0,t.assign?t.assign.idx+":"+t.assign.lock:"",Object.keys(t.rs||{}).join(",")].join("|");}).join(";");
+  if(sig===RM.distSig)return;
+  RM.distSig=sig;rmDistPaint();
+}
+function rmDistPaint(){
+  const tb=document.getElementById("dRows");if(!tb)return;
+  const p=rmPlan(),list=rmTeamsList(),now=rmNow();
+  if(!list.length){tb.innerHTML='<tr><td colspan="6" class="rm-empty">'+rt("dNoTeams")+'</td></tr>';return;}
+  const opts=function(sel){return '<option value="">'+rt("dNone")+'</option>'+AR_CASES.map(function(c,i){return '<option value="'+i+'"'+(sel===i?" selected":"")+'>'+N(i+1)+' · '+rmEsc(caseTitleByIdx(i))+'</option>';}).join("");};
+  const colors=["#C09A56","#7FA6D6","#B8664F","#8FD3A8","#C58AD6","#D6C37F"];
+  tb.innerHTML=list.map(function(t){
+    const a=p.assign[t.id];const played=rmPlayedSet(t.id);const on=now-(t.lastSeen||0)<26000;
+    const cur=t.assign&&typeof t.assign.idx==="number"&&AR_CASES[t.assign.idx]?t.assign:null;
+    const pl=Object.keys(played).map(function(i){return '<span class="rm-chip sm">'+rmEsc(caseTitleByIdx(+i))+'</span>';}).join(" ");
+    return '<tr><td><input type="checkbox" class="dsel" data-t="'+rmEsc(t.id)+'"'+(p.sel[t.id]!==false?" checked":"")+' style="accent-color:#C09A56"></td>'+
+      '<td><span class="rm-dot '+(on?"ok":"")+'"></span><b>'+rmEsc(t.name)+'</b>'+(p.groupOf[t.id]?'<span class="rm-grp" style="background:'+colors[p.groupOf[t.id]%colors.length]+'"></span>':'')+'</td>'+
+      '<td><select class="rm-in dk sel dcase" data-t="'+rmEsc(t.id)+'">'+opts(a==null?-1:a)+'</select>'+
+        (a!=null?'<div class="rm-mem">'+rmEsc(rmCaseInfo(a))+'</div>':'')+(a!=null&&played[a]?'<div class="rm-mem" style="color:#E0A040">'+rt("dPlayedWarn")+'</div>':'')+'</td>'+
+      '<td>'+(pl||'<span class="rm-mem">—</span>')+'</td>'+
+      '<td>'+(cur?'<span class="rm-chip sm ok">✓ '+rmEsc(caseTitleByIdx(cur.idx))+(cur.lock?' 🔒':'')+'</span>':'<span class="rm-mem">—</span>')+'</td>'+
+      '<td>'+((p.mode==="draw"||p.mode==="same")?'<button class="rm-sm" data-roll="'+rmEsc(t.id)+'">🎲</button>':'')+'</td></tr>';
+  }).join("");
+  tb.querySelectorAll(".dsel").forEach(function(c){c.onchange=function(){p.sel[c.getAttribute("data-t")]=c.checked;const n=Object.keys(p.sel).filter(function(k){return p.sel[k]&&list.some(function(t){return t.id===k;});}).length;const s=document.getElementById("dSelN");if(s)s.textContent=N(n);};});
+  tb.querySelectorAll(".dcase").forEach(function(s){s.onchange=function(){const id=s.getAttribute("data-t");p.assign[id]=s.value===""?null:+s.value;rmDistPaint();};});
+  tb.querySelectorAll("[data-roll]").forEach(function(b){b.onclick=function(){const id=b.getAttribute("data-roll");const keep=p.mode;rmRoll([id]);rmDistPaint();};});
+  const n=list.filter(function(t){return p.sel[t.id]!==false;}).length;const s=document.getElementById("dSelN");if(s)s.textContent=N(n);
+  const all=document.getElementById("dAll");if(all)all.checked=n===list.length;
+}
+function rmSendPlan(){
+  const p=rmPlan(),list=rmTeamsList(),msg=document.getElementById("dMsgT");
+  const ts=rmNow(),jobs=[],a={};
+  list.forEach(function(t){
+    const i=p.assign[t.id];if(i==null)return;
+    const cur=t.assign;
+    if(cur&&cur.idx===i&&!!cur.lock===!!p.lock)return;
+    a[t.id]=i;
+    jobs.push(RM.be.updatePath(RM.code,"teams/"+t.id,{assign:{idx:i,id:AR_CASES[i].id,ts:ts,lock:p.lock?1:0}}));
+  });
+  if(!jobs.length){if(msg){msg.className="rm-msg";msg.textContent=rt("dNothing");}return;}
+  jobs.push(RM.be.setPath(RM.code,"rounds/r"+ts,{at:ts,mode:p.mode,a:a}));
+  Promise.all(jobs).then(function(){if(msg){msg.className="rm-msg ok";msg.textContent=rt("dSentOk")+N(Object.keys(a).length)+rt("dTeams");}sfx("ok");})
+    .catch(function(e){if(msg){msg.className="rm-msg bad";msg.textContent=rt("errNet")+(e.message||e);}});
+}
+function rmClearAssign(){
+  const msg=document.getElementById("dMsgT");
+  Promise.all(rmTeamsList().map(function(t){return RM.be.setPath(RM.code,"teams/"+t.id+"/assign",null);})).then(function(){
+    const p=rmPlan();p.groupOf={};if(msg){msg.className="rm-msg ok";msg.textContent=rt("dCleared");}});
+}
+
+/* ---------- رسائل موجّهة ---------- */
+function rmRcpt(){if(!RM.rcpt)RM.rcpt={ids:{},kind:"n"};return RM.rcpt;}
+function rmMsgBuild(){
+  const el=document.getElementById("rmMsg");if(!el)return;
+  const r=rmRcpt();
+  el.innerHTML=
+   '<b class="hint">'+rt("mTo")+' <span class="cnt" id="mCnt">0</span> '+rt("mCountT")+'</b>'+
+   '<div class="rm-chips" id="mQuick" style="margin:8px 0">'+[["all","mAll"],["online","mOnline"],["playing","mPlaying"],["stuck","mStuck"],["notstarted","mNotStarted"],["done","mDone"]].map(function(x){
+      return '<button class="rm-chip" data-q="'+x[0]+'">'+rt(x[1])+'</button>';}).join("")+'</div>'+
+   '<div id="mList" class="rm-rlist"></div>'+
+   '<div class="rm-chips" id="mKinds" style="margin-top:10px">'+[["n","mKindN"],["h","mKindH"],["u","mKindU"],["t","mKindT"]].map(function(x){
+      return '<button class="rm-chip'+(r.kind===x[0]?" on":"")+'" data-k="'+x[0]+'">'+rt(x[1])+'</button>';}).join("")+'</div>'+
+   '<textarea id="mTxt" rows="2" class="rm-in dk" style="margin-top:8px" maxlength="200" placeholder="'+rt("mPh")+'"></textarea>'+
+   '<div class="rm-chips" style="margin-top:6px">'+["mTpl1","mTpl2","mTpl3","mTpl4"].map(function(k){return '<button class="rm-chip sm tpl">'+rt(k)+'</button>';}).join("")+'</div>'+
+   '<div class="rm-row" style="margin-top:10px"><button class="rm-sm gold" id="mSend">'+rt("mSend")+'</button><span class="rm-msg" id="mMsgT"></span></div>'+
+   '<div id="mLog" style="margin-top:12px"></div>';
+  const $=function(id){return document.getElementById(id);};
+  el.querySelectorAll("#mQuick [data-q]").forEach(function(b){b.onclick=function(){
+    const now=rmNow(),q=b.getAttribute("data-q");r.ids={};
+    rmTeamsList().forEach(function(t){const c=rmTeamClass(t,now);
+      if(q==="all"||(q==="online"&&c.on)||(q==="playing"&&c.playing)||(q==="stuck"&&(c.stuck||t.help))||(q==="notstarted"&&c.notstarted)||(q==="done"&&c.done))r.ids[t.id]=true;});
+    rmMsgList();};});
+  el.querySelectorAll("#mKinds [data-k]").forEach(function(b){b.onclick=function(){r.kind=b.getAttribute("data-k");
+    el.querySelectorAll("#mKinds [data-k]").forEach(function(x){x.classList.toggle("on",x===b);});};});
+  el.querySelectorAll(".tpl").forEach(function(b){b.onclick=function(){$("mTxt").value=b.textContent;};});
+  $("mSend").onclick=function(){
+    const ids=Object.keys(r.ids).filter(function(k){return r.ids[k];});const txt=$("mTxt").value.trim();const t=$("mMsgT");
+    if(!ids.length){t.className="rm-msg bad";t.textContent=rt("mNoRcpt");return;}
+    if(!txt){t.className="rm-msg bad";t.textContent=rt("mNoText");return;}
+    const id="m"+rmNow().toString(36)+rmRand(3);const to={};ids.forEach(function(k){to[k]=true;});
+    RM.be.setPath(RM.code,"msgs/"+id,{text:txt,k:r.kind,ts:rmNow(),to:(ids.length===rmTeamsList().length&&ids.length>1)?"all":to,n:ids.length}).then(function(){
+      t.className="rm-msg ok";t.textContent=rt("mSent");$("mTxt").value="";});
+  };
+  RM.msgSig="";rmMsgList();
+}
+function rmMsgList(){
+  const l=document.getElementById("mList");if(!l)return;
+  const r=rmRcpt(),list=rmTeamsList(),now=rmNow();
+  l.innerHTML=list.map(function(t){const c=rmTeamClass(t,now);
+    return '<label class="rm-chk"><input type="checkbox" data-t="'+rmEsc(t.id)+'"'+(r.ids[t.id]?" checked":"")+'> <span class="rm-dot '+(c.on?"ok":"")+'"></span>'+rmEsc(t.name)+
+      ' <span class="rm-mem">· '+(c.stuck?"⚠ ":"")+rmStatusText(t)+'</span></label>';}).join("");
+  l.querySelectorAll("input").forEach(function(c){c.onchange=function(){r.ids[c.getAttribute("data-t")]=c.checked;rmMsgCount();};});
+  rmMsgCount();
+}
+function rmMsgCount(){
+  const r=rmRcpt(),c=document.getElementById("mCnt");if(!c)return;
+  const live={};rmTeamsList().forEach(function(t){live[t.id]=1;});
+  c.textContent=N(Object.keys(r.ids).filter(function(k){return r.ids[k]&&live[k];}).length);
+}
+function rmMsgRefresh(){
+  const list=rmTeamsList();
+  const sig=list.map(function(t){return t.id+t.name+t.view;}).join(";");
+  if(sig!==RM.msgSig){RM.msgSig=sig;rmMsgList();}
+  const lg=document.getElementById("mLog");if(!lg)return;
+  const room=RM.room||{},msgs=room.msgs||{},acks=room.acks||{};
+  const ids=Object.keys(msgs).sort(function(a,b){return (msgs[b].ts||0)-(msgs[a].ts||0);}).slice(0,4);
+  const names={};list.forEach(function(t){names[t.id]=t.name;});
+  lg.innerHTML=ids.length?'<b class="hint">'+rt("mLog")+'</b>'+ids.map(function(id){
+    const m=msgs[id];const to=m.to==="all"?list.map(function(t){return t.id;}):Object.keys(m.to||{}).filter(function(k){return names[k];});
+    const ic={n:"",h:"💡 ",u:"🚨 ",t:"⏱ "}[m.k||"n"];
+    return '<div class="rm-ml"><div class="rm-mltx">'+ic+rmEsc(m.text)+'</div><div class="rm-chips">'+to.map(function(k){
+      const seen=acks[id]&&acks[id][k];return '<span class="rm-chip sm '+(seen?"ok":"")+'">'+rmEsc(names[k])+' '+(seen?rt("mSeen"):rt("mUnseen"))+'</span>';}).join("")+'</div></div>';}).join(""):"";
+}
+
+/* =====================================================================
+   v23: الترتيب اللايف + شاشة العرض + تفاصيل الفريق + سجل الدخول والخروج
+   ===================================================================== */
+function rmModeOf(room){const m=(room&&room.meta)||{};return m.status==="ended"?"official":(m.rankMode||"live");}
+function rmProg(t){
+  if(!t||t.view!=="case"||!t.readN)return 0;
+  const rd=Math.min(1,(t.read||0)/t.readN),cn=t.pairs?Math.min(1,(t.found||0)/t.pairs):0;
+  return Math.min(1,0.75*rd+0.25*cn);
+}
+function rmLiveEst(t){
+  if(!t||t.view!=="case"||!t.cid)return 0;
+  if(t.rs&&t.rs[t.cid])return 0;                 /* القضية دي اتحسمت: اتحسبت في النقاط الرسمية */
+  return Math.max(0,Math.round(rmProg(t)*70)-10*(t.tries||0));
+}
+function rmScoreOf(t,mode){return (t.total||0)+(mode==="official"?0:rmLiveEst(t));}
+function rmOrder(room,mode){
+  const teams=(room&&room.teams)||{};mode=mode||rmModeOf(room);
+  return rmVisible(room).map(function(id){return Object.assign({id:id},teams[id]);})
+    .sort(function(a,b){return rmScoreOf(b,mode)-rmScoreOf(a,mode)||(b.nsolved||0)-(a.nsolved||0)||(a.sumSecs||0)-(b.sumSecs||0)||String(a.name).localeCompare(String(b.name));});
+}
+function rmRankRender(el,room,o){
+  o=o||{};const mode=o.mode||rmModeOf(room),big=!!o.big,hide=!!o.hide;
+  const st=el._lr||(el._lr={prev:{},tm:{},leader:null,n:0});
+  const rows=rmOrder(room,mode),H=big?92:68,G=big?12:8;
+  el.style.position="relative";el.style.height=Math.max(rows.length,1)*(H+G)+"px";
+  if(!rows.length){el.innerHTML='<p class="rm-empty">'+rt("noTeams")+'</p>';el.style.height="auto";st.prev={};return;}
+  const emp=el.querySelector(".rm-empty");if(emp)emp.remove();
+  const keep={};
+  rows.forEach(function(t,i){
+    keep[t.id]=1;
+    let r=null;el.querySelectorAll(".lr").forEach(function(x){if(x.getAttribute("data-id")===t.id)r=x;});
+    if(!r){
+      r=document.createElement("div");r.className="lr"+(big?" big":"");r.setAttribute("data-id",t.id);
+      r.innerHTML='<div class="rk"></div><div class="dl"></div><div class="nm"></div><div class="pt"></div>';
+      r.style.transition="none";r.style.transform="translateY("+(i*(H+G))+"px)";el.appendChild(r);void r.offsetHeight;r.style.transition="";
+    }
+    r.style.height=H+"px";r.style.transform="translateY("+(i*(H+G))+"px)";
+    r.classList.toggle("first",i===0);
+    const old=st.prev[t.id],d=old==null?null:old-i,dl=r.querySelector(".dl");
+    const setDl=function(cls,txt){
+      dl.className="dl "+cls;dl.textContent=txt;clearTimeout(st.tm[t.id]);
+      st.tm[t.id]=setTimeout(function(){dl.className="dl";dl.textContent="";},7000);};
+    if(st.n>0){
+      if(old==null)setDl("nw","✦ "+rt("rkNew"));
+      else if(d>0)setDl("up","▲ "+N(d));
+      else if(d<0)setDl("dn","▼ "+N(-d));
+    }
+    r.querySelector(".rk").textContent=N(i+1);
+    const inCase=t.view==="case";
+    const sub=hide?"":(inCase&&typeof t.ci==="number"?caseTitleByIdx(t.ci):rmStatusText(t));
+    const mem=rmArr(t.members).join(" · ");
+    r.querySelector(".nm").innerHTML=(i===0?'<span class="crown">👑</span>':'')+rmEsc(t.name)+
+      '<small>'+rmEsc(hide?mem:(mem?mem+" · ":"")+sub)+'</small>'+
+      ((!hide&&inCase)?'<div class="prog"><i style="width:'+Math.round(rmProg(t)*100)+'%"></i></div>':'');
+    r.querySelector(".pt").innerHTML='<b>'+N(rmScoreOf(t,mode))+'</b><span>'+(mode==="live"&&rmLiveEst(t)>0?rt("rkEst"):rt("rkPts"))+'</span>';
+    st.prev[t.id]=i;
+  });
+  el.querySelectorAll(".lr").forEach(function(x){
+    const id=x.getAttribute("data-id");
+    if(!keep[id]){x.classList.add("gone");delete st.prev[id];setTimeout(function(){if(x.parentNode)x.remove();},500);}
+  });
+  const top=rows[0];
+  if(st.leader!==null&&top&&st.leader!==top.id&&o.onLeader)o.onLeader(top);
+  st.leader=top?top.id:null;st.n++;
+}
+/* ---- لوحة الترتيب اللايف داخل لوحة المنسّق ---- */
+function rmRankBuild(){
+  const el=document.getElementById("rmRK");if(!el)return;
+  el.innerHTML=
+   '<div class="rm-row" style="margin-bottom:10px"><div class="rm-chips" id="rkModes"><button class="rm-chip" data-rm="live">'+rt("rkLive")+'</button><button class="rm-chip" data-rm="official">'+rt("rkOff")+'</button></div>'+
+   '<label class="rm-chk"><input type="checkbox" id="rkHide"> '+rt("rkHide")+'</label><span class="rm-grow"></span>'+
+   '<button class="rm-sm gold" id="rkScr">'+rt("rkScreen")+'</button><button class="rm-sm" id="rkLink">'+rt("rkCopyScr")+'</button></div>'+
+   '<p class="rm-hint" id="rkNote"></p><div class="lead" id="rkLead"></div><div class="lrk" id="rkBoard"></div>';
+  el.querySelectorAll("[data-rm]").forEach(function(b){b.onclick=function(){rmMeta({rankMode:b.getAttribute("data-rm")});};});
+  document.getElementById("rkHide").onchange=function(){rmMeta({hideProg:this.checked});};
+  document.getElementById("rkScr").onclick=rmOpenScreen;
+  document.getElementById("rkLink").onclick=function(){const b=this,o=b.textContent;rmCopy(rmScreenLink());b.textContent=rt("copied");setTimeout(function(){b.textContent=o;},1400);};
+}
+function rmScreenLink(){try{return location.origin+location.pathname+"?screen="+RM.code;}catch(e){return "?screen="+RM.code;}}
+function rmLeaderBanner(el,t){
+  if(!el)return;el.style.display="block";el.textContent=rt("rkLeader")+" "+t.name+" "+rt("rkFirst");
+  clearTimeout(el._t);el._t=setTimeout(function(){el.style.display="none";},5000);try{sfx("stamp");}catch(e){}
+}
+function rmRankPaint(room){
+  const meta=(room&&room.meta)||{},mode=rmModeOf(room);
+  const b=document.getElementById("rkBoard");
+  if(b){
+    document.querySelectorAll("#rkModes [data-rm]").forEach(function(x){x.classList.toggle("on",x.getAttribute("data-rm")===(meta.rankMode||"live"));});
+    const hc=document.getElementById("rkHide");if(hc&&document.activeElement!==hc)hc.checked=!!meta.hideProg;
+    const nt=document.getElementById("rkNote");if(nt)nt.textContent=rt(mode==="live"?"rkNoteLive":"rkNoteOff");
+    const lead=document.getElementById("rkLead");
+    rmRankRender(b,room,{mode:mode,hide:!!meta.hideProg,onLeader:function(t){rmLeaderBanner(lead,t);}});
+  }
+  rmScreenPaint(room);
+}
+/* ---- شاشة العرض (ملء الشاشة) ---- */
+function rmScreenShell(isOverlay){
+  let s=document.getElementById("rmScreen");if(s)s.remove();
+  s=document.createElement("div");s.id="rmScreen";s.className="rm-screen";
+  s.innerHTML='<div class="rs-head"><div class="rs-logo">ملفات <span>مباحث</span></div><div class="rs-info"><span class="rs-mode" id="rsMode"></span>'+
+    '<span class="rs-join">'+rt("rkJoin")+' <b id="rsCode"></b></span></div>'+(isOverlay?'<button class="rs-x" id="rsX">✕</button>':'')+'</div>'+
+    '<div class="rs-lead lead" id="rsLead"></div><div class="rs-body"><div class="lrk" id="rsBoard"></div></div>';
+  document.body.appendChild(s);
+  if(isOverlay){document.getElementById("rsX").onclick=rmCloseScreen;}
+  return s;
+}
+function rmOpenScreen(){
+  rmScreenShell(true);
+  RM.screenKey=function(e){if(e.key==="Escape")rmCloseScreen();};document.addEventListener("keydown",RM.screenKey);
+  try{const d=document.documentElement;if(d.requestFullscreen)d.requestFullscreen();}catch(e){}
+  rmScreenPaint(RM.room);
+}
+function rmCloseScreen(){
+  const s=document.getElementById("rmScreen");if(s)s.remove();
+  if(RM.screenKey){document.removeEventListener("keydown",RM.screenKey);RM.screenKey=null;}
+  try{if(document.fullscreenElement)document.exitFullscreen();}catch(e){}
+}
+function rmScreenPaint(room){
+  const s=document.getElementById("rmScreen");if(!s||!room||!room.meta)return;
+  const meta=room.meta,mode=rmModeOf(room);
+  const code=RM.code||RM.screenCode||"";
+  document.getElementById("rsCode").textContent=code;
+  document.getElementById("rsMode").textContent=mode==="live"?rt("rkLiveTag"):rt("rkOffTag");
+  rmRankRender(document.getElementById("rsBoard"),room,{mode:mode,hide:!!meta.hideProg,big:true,onLeader:function(t){rmLeaderBanner(document.getElementById("rsLead"),t);}});
+}
+function rmScreenBoot(code){
+  code=String(code||"").toUpperCase().replace(/[^A-Z0-9]/g,"");
+  document.body.classList.add("rm-screen-mode");
+  RM.screenCode=code;rmScreenShell(false);document.getElementById("rsCode").textContent=code;
+  const be=rmBE();
+  be.init().then(function(){
+    RM.be=be;
+    be.subscribe(code,function(room){
+      RM.room=room;
+      if(!room||!room.meta){const b=document.getElementById("rsBoard");if(b){b.innerHTML='<p class="rm-empty" style="font-size:22px">'+rt("errNoRoom")+'</p>';b.style.height="auto";}return;}
+      rmScreenPaint(room);
+    });
+  }).catch(function(e){const b=document.getElementById("rsBoard");if(b)b.innerHTML='<p class="rm-empty">'+rt("errNet")+rmEsc(e.message||e)+'</p>';});
+}
+
+/* ---- الدخول والخروج ---- */
+function rmPresence(room){
+  if(!room||RM.role!=="host")return;
+  const teams=room.teams||{},banned=room.banned||{},now=rmNow();
+  Object.keys(teams).forEach(function(id){
+    if(banned[id])return;
+    const t=teams[id]||{};if(!t.lastSeen)return;
+    const on=now-t.lastSeen<26000,prev=RM.onl[id];
+    if(prev!==undefined&&prev!==on){
+      const ts=on?now:t.lastSeen;
+      RM.be.setPath(RM.code,"teams/"+id+"/pres/p"+ts.toString(36),{o:on?1:0,t:ts}).catch(function(){});
+      const keys=Object.keys(t.pres||{}).sort();
+      if(keys.length>19)keys.slice(0,keys.length-19).forEach(function(k){RM.be.setPath(RM.code,"teams/"+id+"/pres/"+k,null).catch(function(){});});
+    }
+    RM.onl[id]=on;
+  });
+}
+function rmClock(ts){
+  const d=new Date(ts-((RM.be&&RM.be.offset)||0));
+  return N(String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"));
+}
+function rmRel(ts){
+  const s=Math.max(0,Math.floor((rmNow()-ts)/1000));
+  if(s<60)return N(s)+rt("secs");
+  if(s<3600)return N(Math.floor(s/60))+(LANG==="ar"?" د":" m");
+  return N(Math.floor(s/3600))+(LANG==="ar"?" س":" h");
+}
+function rmFeedItems(room){
+  const out=[],teams=room.teams||{},banned=room.banned||{};
+  Object.keys(teams).forEach(function(id){
+    if(banned[id])return;const t=teams[id]||{},nm=t.name||id;
+    if(t.jn)out.push({t:t.jn,k:"in",x:rt("feedJoin")+": "+nm});
+    Object.keys(t.pres||{}).forEach(function(k){const p=t.pres[k];if(p&&p.t)out.push({t:p.t,k:p.o?"back":"out",x:(p.o?rt("feedBack"):rt("feedOut"))+": "+nm});});
+  });
+  Object.keys(room.pending||{}).forEach(function(id){const p=room.pending[id];out.push({t:p.ts||0,k:"req",x:rt("feedReq")+": "+p.name});});
+  Object.keys(room.approved||{}).forEach(function(id){const p=room.approved[id];if(p&&p.ts)out.push({t:p.ts,k:"ok",x:rt("feedOk")+": "+p.name});});
+  Object.keys(banned).forEach(function(id){const p=banned[id];if(p&&p.ts)out.push({t:p.ts,k:"kick",x:rt("feedKick")+": "+p.name});});
+  return out.sort(function(a,b){return b.t-a.t;}).slice(0,25);
+}
+function rmFeedPaint(room){
+  const el=document.getElementById("rmFeed");if(!el)return;
+  const it=rmFeedItems(room||{});
+  const ic={in:"🟢",back:"🔄",out:"🔴",req:"🔔",ok:"✅",kick:"⛔"};
+  el.innerHTML=it.length?'<div class="rm-feed">'+it.map(function(x){return '<div class="rm-fi k-'+x.k+'"><time>'+rmClock(x.t)+'</time><span>'+(ic[x.k]||"")+' '+rmEsc(x.x)+'</span></div>';}).join("")+'</div>':'<p class="rm-hint">'+rt("feedEmpty")+'</p>';
+}
+
+/* ---- تفاصيل الفريق ---- */
+const RM_LOGIC={open:"📄",req:"🔍",con:"🧵",excl:"⛔",acc:"⚖"};
+function rmLogText(k,d){
+  d=String(d||"");
+  if(LANG!=="ar"){return (k==="open"&&!/^(Opened|Open)/i.test(d)?"Opened: ":"")+d;}
+  let o=d.replace(/^فتحت: /,"فتحوا: ").replace(/^صرفت طلب: /,"صرفوا طلب: ").replace(/^شددت خيطاً$/,"لقوا تناقض ✓")
+    .replace(/^محاولة ربط فاشلة$/,"محاولة ربط فاشلة ✗").replace(/^استبعدت: /,"استبعدوا: ").replace(/^رفعت استبعاد: /,"رفعوا الاستبعاد: ")
+    .replace(/^اتهمت: /,"اتهموا: ").replace(/^طلبت توجيهاً$/,"طلبوا توجيهاً");
+  if(k==="open"&&o.indexOf("فتحوا")!==0)o="فتحوا: "+o;
+  return o;
+}
+function rmKeyLbl(c,k){try{return keyLabel(c,k);}catch(e){return k;}}
+function rmPaceNote(t,now){
+  if(t.view!=="case"||!t.start)return "";
+  const el=(now-t.start)/1000,tp=el/((t.est||45)*60),pg=rmProg(t);
+  if(tp-pg>0.25)return '<div class="rm-note warn">⏱ '+rt("tdLate")+'</div>';
+  if(pg-tp>0.15)return '<div class="rm-note ok">⚡ '+rt("tdAhead")+'</div>';
+  return '<div class="rm-note">✓ '+rt("tdOk")+'</div>';
+}
+function rmDrawerHTML(tid){
+  const room=RM.room||{},t=(room.teams||{})[tid],now=rmNow();
+  const gone='<div class="rm-bh">'+rt("tdT")+'</div><div class="rm-bb"><p class="rm-hint">'+rt("tdGone")+'</p><div class="rm-act"><button class="rm-sm" id="tdX">'+rt("close")+'</button></div></div>';
+  if(!t)return gone;
+  const mode=rmModeOf(room),list=rmOrder(room,mode),rk=list.findIndex(function(x){return x.id===tid;})+1;
+  const cl=rmTeamClass(Object.assign({id:tid},t),now),inCase=t.view==="case";
+  const c=(typeof t.ci==="number"&&AR_CASES[t.ci])?loc(t.ci):null;
+  const csv=function(s){return s?String(s).split(",").filter(Boolean):[];};
+  const box=function(title,body){return '<div class="rm-dbox"><h4>'+title+'</h4>'+body+'</div>';};
+  const bar=function(v,max,cls){const p=max?Math.max(0,Math.min(100,v/max*100)):0;return '<span class="rm-bar"><i class="'+cls+'" style="width:'+p.toFixed(0)+'%"></i></span>';};
+  /* الحالة الحالية */
+  let cur='<div class="rm-cs" style="margin-bottom:8px">'+rmEsc(c?c.title:rmStatusText(t))+(inCase?'':' · <span class="rm-mem">'+rmStatusText(t)+'</span>')+'</div>';
+  if(inCase&&t.start){
+    const el=Math.floor((now-t.start)/1000),est=(t.est||45)*60;
+    cur+='<div class="rm-bl wide"><span>'+rt("tdTime")+'</span><b>'+rmFmt(el)+' / '+N(t.est||45)+'</b>'+bar(el,est,"t")+'</div>'+
+         '<div class="rm-bl wide"><span>'+rt("tdProg")+'</span><b>'+N(Math.round(rmProg(t)*100))+'٪</b>'+bar(rmProg(t)*100,100,"d")+'</div>'+rmPaceNote(t,now)+
+         '<div class="rm-chips" style="margin-top:8px"><span class="rm-chip sm">'+rt("tcTry")+' '+N(t.tries||0)+'</span><span class="rm-chip sm">'+rt("tdHints")+' '+N(t.nudges||0)+'</span></div>';
+    try{const sp=scoreParts({ci:t.ci,secs:el,used:t.used||0,maxReq:t.maxReq||6,con:t.found||0,pairs:t.pairs||1,tries:(t.tries||0)+1,won:1,nameOk:1,excl:15});
+      cur+='<div class="rm-proj">'+rt("tdProj")+': <b>~'+N(sp.total)+'</b></div>';}catch(e){}
+  }
+  cur+='<div class="rm-proj">'+rt("tdRank")+': <b>#'+N(rk)+'</b> '+rt("tdOf")+' '+N(list.length)+' · <b>'+N(rmScoreOf(t,mode))+'</b> '+rt("rkPts")+'</div>';
+  /* الدخول والخروج */
+  const pres=Object.keys(t.pres||{}).map(function(k){return t.pres[k];}).filter(function(p){return p&&p.t;});
+  if(t.jn)pres.push({t:t.jn,o:2});
+  pres.sort(function(a,b){return b.t-a.t;});
+  const ent='<div class="rm-chips"><span class="rm-chip sm '+(cl.on?"ok":"warn")+'">'+(cl.on?rt("tdOnline"):rt("tdOffline"))+'</span>'+
+      (t.lastSeen?'<span class="rm-chip sm">'+rt("tdLastSeen")+' '+rt("tdAgo")+' '+rmRel(t.lastSeen)+'</span>':'')+'</div>'+
+    '<div class="rm-tl" style="margin-top:8px">'+(pres.length?pres.slice(0,12).map(function(p){
+      return '<div class="'+(p.o===0?"bad":"ok")+'"><time>'+rmClock(p.t)+'</time>'+(p.o===2?rt("tdJoined"):(p.o?rt("tdBack"):rt("tdLeft")))+'</div>';}).join(""):'<span class="rm-mem">'+rt("tdNone")+'</span>')+'</div>';
+  /* استهلكوا إيه */
+  let cons='<span class="rm-mem">'+rt("tdNone")+'</span>';
+  if(c){
+    const rdk={},rk2=csv(t.rk);rk2.forEach(function(k){rdk[k]=1;});
+    const keys=fileKeys(c);
+    const docs=keys.map(function(k){return '<span class="rm-dc'+(rdk[k]?" r":"")+'">'+rmEsc(rmKeyLbl(c,k))+'</span>';}).join("");
+    const usd={};csv(t.uq).forEach(function(k){usd[k]=1;});
+    const reqs=c.reqs.map(function(r){return '<span class="rm-dc'+(usd[r.id]?" r":"")+'">'+rmEsc(r.lb)+'</span>';}).join("");
+    const found=csv(t.fk).map(function(k){const pr=c.pairs.find(function(p){return p[0]+"|"+p[1]===k;});return '<div class="rm-fnd">🧵 '+rmEsc(pr&&pr[2]?String(pr[2]).slice(0,140):k)+'</div>';}).join("");
+    cons='<div class="rm-sub">'+rt("tdDocs")+' ('+N(rk2.length)+'/'+N(keys.length)+')</div><div class="rm-docs">'+docs+'</div>'+
+         '<div class="rm-sub">'+rt("tdReqs")+' ('+N(csv(t.uq).length)+'/'+N(c.reqs.length)+')</div><div class="rm-docs">'+reqs+'</div>'+
+         '<div class="rm-sub">'+rt("tdCons")+' ('+N(csv(t.fk).length)+'/'+N(c.pairs.length)+')</div>'+(found||'<span class="rm-mem">'+rt("tdNone")+'</span>');
+  }
+  /* الاتهام */
+  let acc='<span class="rm-mem">'+rt("tdNone")+'</span>';
+  if(c){
+    const atts=rmArr(t.ac).filter(function(a){return a&&a.c===c.id;});
+    const nameOf=function(id){const p=c.people.find(function(x){return x.id===id;});return p?p.name:id;};
+    const ex=csv(t.xo).map(function(id){const bad=id===c.culprit;return '<span class="rm-chip sm '+(bad?"warn":"")+'">'+(bad?"⚠ ":"")+rmEsc(nameOf(id))+(bad?" — "+rt("tdExclCulprit"):"")+'</span>';}).join(" ");
+    acc=(atts.length?atts.map(function(a){
+      const docs=csv(a.d).map(function(k){return rmEsc(rmKeyLbl(c,k));}).join(" + ");
+      return '<div class="rm-att '+(a.ok?"ok":"bad")+'"><b>'+rt("tdAtt")+' '+N(a.n)+'</b> · '+rmFmt(a.s||0)+'<div>'+rt("tdAccused")+' <b>'+rmEsc(nameOf(a.w))+'</b> '+(a.nm?'<span class="rm-chip sm ok">'+rt("tdNameOk")+'</span>':'<span class="rm-chip sm warn">'+rt("tdNameBad")+'</span>')+
+        ' '+(a.dc?'<span class="rm-chip sm ok">'+rt("tdProofOk")+'</span>':'<span class="rm-chip sm warn">'+rt("tdProofBad")+'</span>')+'</div>'+
+        (docs?'<div class="rm-mem">'+rt("tdWith")+': '+docs+'</div>':'')+'</div>';}).join(""):'<span class="rm-mem">'+rt("tdNone")+'</span>')+
+      '<div class="rm-sub">'+rt("tdExcl")+'</div><div>'+(ex||'<span class="rm-mem">'+rt("tdNone")+'</span>')+'</div>';
+  }
+  /* سجل النشاط */
+  const lg=rmArr(t.lg).map(function(x){const p=String(x).split("|");return {s:+p[0]||0,k:p[1]||"",d:p.slice(2).join("|")};}).reverse();
+  const log=lg.length?'<div class="rm-tl">'+lg.map(function(e){return '<div class="'+(e.k==="acc"?"bad":(e.k==="con"?"ok":""))+'"><time>'+rmFmt(e.s)+'</time>'+(RM_LOGIC[e.k]||"")+' '+rmEsc(rmLogText(e.k,e.d))+'</div>';}).join("")+'</div>':'<span class="rm-mem">'+rt("tdNone")+'</span>';
+  /* تاريخهم */
+  const hist=Object.keys(t.rs||{}).map(function(id){const r=t.rs[id];const i=AR_CASES.findIndex(function(x){return x.id===id;});
+    return '<div class="rm-hrow"><b>'+rmEsc(i>=0?caseTitleByIdx(i):id)+'</b><span>'+N(r.s||0)+' '+rt("rkPts")+' · '+rt("tcTry")+' '+N(r.t||1)+' · '+rmFmt(r.sec||0)+'</span></div>';}).join("");
+  return '<div class="rm-drawer"><div class="rm-dh"><span class="rm-dot '+(cl.on?"ok":"")+'"></span><b class="rm-dn">'+rmEsc(t.name||tid)+'</b><span class="rm-mem">'+rmEsc(rmArr(t.members).join(" · "))+'</span><span class="rm-grow"></span>'+
+    '<button class="rm-sm" id="tdMsg">'+rt("tdMsg")+'</button><button class="rm-sm bad" id="tdKick">'+rt("kick")+'</button><button class="rm-sm" id="tdX">✕</button></div>'+
+    '<div class="rm-dgrid">'+box(rt("tdNow"),cur)+box(rt("tdEnter"),ent)+box(rt("tdConsumed"),cons)+box(rt("tdAccuse"),acc)+'</div>'+
+    '<div class="rm-dgrid">'+box(rt("tdLog"),log)+box(rt("tdHist"),hist||'<span class="rm-mem">'+rt("tdNone")+'</span>')+'</div></div>';
+}
+function rmWireDrawer(m,tid){
+  const x=m.querySelector("#tdX");if(x)x.onclick=rmClose;
+  const k=m.querySelector("#tdKick");if(k)k.onclick=function(){rmClose();rmAskKick(tid);};
+  const g=m.querySelector("#tdMsg");if(g)g.onclick=function(){
+    rmClose();const r=rmRcpt();r.ids={};r.ids[tid]=true;const d=document.getElementById("rmMD");if(d)d.open=true;rmMsgList();
+    const tx=document.getElementById("mTxt");if(d&&d.scrollIntoView)d.scrollIntoView({behavior:"smooth",block:"center"});if(tx)tx.focus();};
+}
+function rmOpenTeam(tid){
+  RM.drawerTid=tid;
+  const m=rmModal(rmDrawerHTML(tid),true,false,"dk");rmWireDrawer(m,tid);
+}
+function rmPaintDrawer(){
+  if(!RM.drawerTid)return;
+  const m=document.getElementById("rmModal"),box=m&&m.querySelector(".rm-box");
+  if(!box||!box.querySelector(".rm-drawer,#tdX")){RM.drawerTid=null;return;}
+  const sc=box.scrollTop;box.innerHTML=rmDrawerHTML(RM.drawerTid);rmWireDrawer(m,RM.drawerTid);box.scrollTop=sc;
 }
 
 (function boot(){
@@ -14126,7 +14995,7 @@ function rmTickHost(){
   }else{
     setLang(LANG);
     /* فتح المساعدة تلقائياً أول مرة */
-    if(!S.seenHelp){setTimeout(function(){if(!RM_LINK)showHelp(true);},1900);}
+    if(!S.seenHelp){setTimeout(function(){if(!RM_LINK&&!RM_SCREEN)showHelp(true);},1900);}
   }
   paintNotes();
   rmBoot();
