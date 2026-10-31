@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>لوحة المالك · كاردجول</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}:root{--bg:#0b0f16;--s1:#121926;--s2:#0e131c;--bd:#1f2837;--tx:#eef2f8;--mu:#8a95a8;--ac:#c6f432;--ok:#3ddc84;--bad:#ff7a7a;--gold:#f4c20d}
+body{background:var(--bg);color:var(--tx);font-family:Cairo,'Segoe UI',Tahoma,sans-serif;min-height:100vh}
+a{color:inherit}button{font-family:inherit;cursor:pointer}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 24px;border-bottom:1px solid var(--bd);background:rgba(14,19,28,.96);backdrop-filter:blur(8px)}
+.top h1{font:900 21px Cairo;display:flex;align-items:center;gap:10px}.tag{font:800 11px Cairo;letter-spacing:.2em;color:var(--gold);border:1px solid rgba(244,194,13,.55);border-radius:10px;padding:0 10px}
+.ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--mu);font-weight:700;font-size:13px}.chip{background:#161d29;border:1px solid #232d3d;border-radius:12px;padding:6px 14px;color:#cfd7e6;font-weight:800;font-size:13px}.chip:hover{border-color:var(--ac)}select.chip{appearance:none}
+.wrap{padding:18px 24px 60px;display:grid;gap:14px;max-width:1500px;margin:0 auto}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.k{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:14px 16px;min-width:0}.k small{display:block;color:var(--mu);font-weight:700;font-size:12.5px}.k b{display:block;font:800 26px Orbitron,Cairo;margin:5px 0 2px;white-space:nowrap}.k i{font-style:normal;font-weight:700;font-size:12px;color:var(--ok)}.k.live b{color:var(--ac)}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);margin-inline-end:6px}
+.row{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}.card{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:14px 16px;min-width:0;overflow:hidden}.card h3{font:900 14.5px Cairo}.card .s{color:var(--mu);font-weight:700;font-size:11.5px;margin:2px 0 8px}
+table{width:100%;border-collapse:collapse;font-weight:700;font-size:12.5px}th{color:var(--mu);text-align:start;font-weight:800;padding:6px;border-bottom:1px solid var(--bd);white-space:nowrap;cursor:default}th.sort{cursor:pointer}th.sort:hover{color:var(--tx)}td{padding:7px 6px;border-bottom:1px solid #182030;vertical-align:middle}tr:last-child td{border-bottom:0}tbody tr.click{cursor:pointer}tbody tr.click:hover{background:#171f2e}
+.on{color:var(--ok)}.bz{color:#ffd35c}.off{color:#6c7686}.mono{font-family:'Courier New',monospace;direction:ltr;text-align:left}.err{color:#ffb4b4;direction:ltr;text-align:left;font-family:'Courier New',monospace;font-size:12px;word-break:break-word}
+.bar{height:8px;border-radius:4px;background:#1b2434;overflow:hidden;margin:4px 0 8px}.bar i{display:block;height:100%}.lg{display:flex;justify-content:space-between;font-weight:700;font-size:12px;color:#cfd7e6}
+.av{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#1d2738;color:#cfd7e6;font-weight:900;font-size:12px;flex:none}.u{display:flex;align-items:center;gap:8px}.seal{width:15px;height:15px;vertical-align:-3px;margin-inline-start:3px}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}.tools input{flex:1;min-width:220px;padding:10px 14px;border-radius:12px;background:var(--s2);border:1px solid var(--bd);color:var(--tx);font:700 14px Cairo}.tools input:focus{outline:0;border-color:var(--ac)}
+.pg{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:10px;color:var(--mu);font-weight:700;font-size:13px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;display:grid;place-items:center;padding:16px}.overlay[hidden]{display:none}.modal{background:var(--s1);border:1px solid var(--bd);border-radius:20px;padding:20px;width:min(560px,100%);max-height:88vh;overflow:auto}.modal h2{font:900 20px Cairo;margin-bottom:10px}.kv{display:grid;grid-template-columns:130px 1fr;gap:6px 12px;font-weight:700;font-size:13.5px}.kv span:nth-child(odd){color:var(--mu)}.kv b{word-break:break-all}
+.center{min-height:70vh;display:grid;place-items:center;text-align:center;padding:20px}.btn{background:var(--ac);color:#10150a;border:0;border-radius:14px;padding:12px 22px;font:900 16px Cairo}.note{color:var(--mu);font-weight:700;font-size:13px;margin-top:10px}
+.sample{color:var(--mu);font-size:12px;font-weight:700;text-align:center}
+@media(max-width:700px){.wrap{padding:12px 12px 50px}.top{padding:10px 12px}.kv{grid-template-columns:100px 1fr}th,td{padding:6px 4px}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div class="overlay" id="ov" hidden><div class="modal" id="md"></div></div>
+<script type="module">
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import {getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+import {getDatabase, ref, get, set, query, orderByChild, orderByKey, startAt, limitToLast, serverTimestamp} from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js';
+const OWNER = 'mahmoudatef0033@gmail.com', CFG = {"apiKey":"AIzaSyDQa5wuXdejC8Ghlj5azxrR4voaBgOHhvE","authDomain":"card-goal.firebaseapp.com","databaseURL":"https://card-goal-default-rtdb.firebaseio.com","projectId":"card-goal","storageBucket":"card-goal.firebasestorage.app","messagingSenderId":"712356390660","appId":"1:712356390660:web:6fb54f12d2a8ee0f845251","measurementId":"G-5JX3MH8EKM"};
+const app = initializeApp(CFG), auth = getAuth(app), db = getDatabase(app), $ = s => document.querySelector(s), root = $('#root');
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const DAY = 864e5, dkey = t => new Date(t).toISOString().slice(0, 10).replace(/-/g, ''), nf = n => Number(n || 0).toLocaleString('en-US');
+const SEAL = '<svg class="seal" viewBox="-10 -10 20 20"><polygon points="0,-9 2.3,-7.2 5.1,-7.4 6,-4.7 8.6,-3.4 7.9,-.7 9,0 7.9,.7 8.6,3.4 6,4.7 5.1,7.4 2.3,7.2 0,9 -2.3,7.2 -5.1,7.4 -6,4.7 -8.6,3.4 -7.9,.7 -9,0 -7.9,-.7 -8.6,-3.4 -6,-4.7 -5.1,-7.4 -2.3,-7.2" fill="#1d9bf0"/><path d="M-3.8 .2 L-.9 3.1 L4.3 -3.1" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const ago = t => { if (!t) return '—'; const d = Date.now() - t; if (d < 6e4) return 'دلوقتي'; if (d < 36e5) return 'منذ ' + Math.floor(d / 6e4) + ' د'; if (d < DAY) return 'منذ ' + Math.floor(d / 36e5) + ' س'; if (d < 30 * DAY) return 'منذ ' + Math.floor(d / DAY) + ' يوم'; return new Date(t).toLocaleDateString('ar-EG'); };
+const vnum = v => String(v || '').replace(/[^0-9.]/g, '').split('.').map(x => +x || 0);
+const vcmp = (a, b) => { const x = vnum(a), y = vnum(b); for (let i = 0; i < 4; i++) { if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) - (y[i] || 0); } return 0; };
+const DEV = {android: 'أندرويد', ios: 'آيفون', desktop: 'كمبيوتر', other: 'تانى'};
+let S = {users: [], pg: 0, per: 25, q: '', sort: 'last', dir: -1, days: 14, errs: [], tour: [], act: {}, cnt: {}};
+function line(vals, w, h, col) { const mx = Math.max(1, ...vals) * 1.12, st = vals.length > 1 ? w / (vals.length - 1) : w, pts = vals.map((v, i) => [i * st, h - (v / mx) * h]), d = 'M' + pts.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' L'); return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="width:100%;height:${h}px"><path d="${d} L${w} ${h} L0 ${h}Z" fill="${col}" opacity=".16"/><path d="${d}" fill="none" stroke="${col}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/></svg>`; }
+function bars(vals, w, h, col) { const mx = Math.max(1, ...vals) * 1.1, bw = w / vals.length; return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="width:100%;height:${h}px">` + vals.map((v, i) => `<rect x="${(i * bw + 2).toFixed(1)}" y="${(h - (v / mx) * h).toFixed(1)}" width="${(bw - 4).toFixed(1)}" height="${((v / mx) * h).toFixed(1)}" rx="2" fill="${col}" opacity="${(.45 + .55 * v / Math.max(1, ...vals)).toFixed(2)}"/>`).join('') + '</svg>'; }
+function signedOut(msg) { root.innerHTML = `<div class="center"><div><h1 style="font:900 26px Cairo;margin-bottom:6px">لوحة المالك <span class="tag">OWNER</span></h1><p class="note">${esc(msg || 'سجّل دخول بحساب المالك علشان تشوف الأرقام.')}</p><br><button class="btn" id="si">دخول بجوجل</button></div></div>`; $('#si').onclick = () => signInWithPopup(auth, new GoogleAuthProvider()).catch(e => signedOut('ما قدرناش ندخل: ' + (e.message || e))); }
+onAuthStateChanged(auth, u => { if (!u) { signedOut(); return; } if (String(u.email || '').toLowerCase() !== OWNER || u.emailVerified === false) { root.innerHTML = `<div class="center"><div><h1 style="font:900 24px Cairo">الصفحة دي للمالك بس</h1><p class="note">الحساب الحالي: ${esc(u.email || 'من غير إيميل')}</p><br><button class="btn" id="so">خروج</button></div></div>`; $('#so').onclick = () => signOut(auth); return; } S.me = u; load(); });
+async function load() {
+  root.innerHTML = '<div class="center"><p class="note">بنحمّل الأرقام…</p></div>';
+  try {
+    const since = dkey(Date.now() - 35 * DAY), q = r => query(ref(db, 'cardgoal/' + r), orderByKey(), startAt(since));
+    const [uS, pS, prS, aS, cS, eS, tS] = await Promise.all([get(ref(db, 'cardgoal/users')), get(ref(db, 'cardgoal/presence')), get(ref(db, 'cardgoal/private')), get(q('activity')), get(q('counters')), get(q('errlog')), get(query(ref(db, 'cardgoal/tourneys'), orderByChild('meta/created'), limitToLast(30)))]);
+    const U = uS.val() || {}, P = pS.val() || {}, PR = prS.val() || {}; S.rawUsers = U; S.act = aS.val() || {}; S.cnt = cS.val() || {};
+    S.users = Object.entries(U).map(([id, u]) => { const p = PR[id] || {}, pr = P[id] || {}; return {id, name: u.name || '', email: p.email || '', provider: p.provider || '', club: u.club || '', fc: u.fc || '', created: +u.createdAt || 0, last: +u.lastLogin || 0, seen: Math.max(+pr.t || 0, +u.lastLogin || 0), hasStats: !!u.stats, ver: p.ver || '', dev: p.dev || '', tz: p.tz || '', vf: !!u.vf, on: pr.on === true, st: pr.st || ''}; });
+    S.errs = []; Object.entries(eS.val() || {}).forEach(([d, items]) => Object.entries(items || {}).forEach(([id, e]) => S.errs.push(Object.assign({id, day: d}, e))));
+    S.tour = Object.entries(tS.val() || {}).map(([code, t]) => ({code, meta: t.meta || {}, seats: Object.keys(t.seats || {}).length})).sort((a, b) => (b.meta.created || 0) - (a.meta.created || 0));
+    S.loaded = Date.now(); render();
+    const today = dkey(Date.now()), mt = (S.cnt[today] || {}).m; set(ref(db, 'cardgoal/ownersummary'), {u: S.users.length, on: S.users.filter(x => x.on).length, mt: mt || 0, ts: serverTimestamp()}).catch(() => {});
+  } catch (e) { root.innerHTML = `<div class="center"><div><h1 style="font:900 22px Cairo">ما قدرناش نقرا البيانات</h1><p class="note err">${esc(e.message || e)}</p><p class="note">لو الرسالة PERMISSION_DENIED يبقى لازم تنشر القواعد الجديدة (v1.7) من Firebase.</p><br><button class="btn" id="rt">حاول تاني</button></div></div>`; $('#rt').onclick = load; }
+}
+function stats() {
+  const U = S.users, now = Date.now(), N = S.days, days = []; for (let i = N - 1; i >= 0; i--) days.push(dkey(now - i * DAY));
+  const sign = days.map(d => U.filter(u => u.created && dkey(u.created) === d).length);
+  const hasAct = Object.keys(S.act).length > 0, actDay = d => Object.keys(S.act[d] || {}).length, uniq = n => { const s = new Set(); for (let i = 0; i < n; i++) Object.keys(S.act[dkey(now - i * DAY)] || {}).forEach(x => s.add(x)); return s.size; };
+  const act = days.map(d => hasAct ? actDay(d) : U.filter(u => u.last && dkey(u.last) === d).length);
+  const mat = days.map(d => (S.cnt[d] || {}).m || 0);
+  const online = U.filter(u => u.on), todayM = (S.cnt[dkey(now)] || {}).m;
+  const dau = hasAct ? uniq(1) : U.filter(u => now - u.last < DAY).length, wau = hasAct ? uniq(7) : U.filter(u => now - u.last < 7 * DAY).length, mau = hasAct ? uniq(30) : U.filter(u => now - u.last < 30 * DAY).length;
+  const sumC = (k, n) => { let t = 0; for (let i = 0; i < n; i++) t += (S.cnt[dkey(now - i * DAY)] || {})[k] || 0; return t; }, m7 = sumC('m', 7), onl7 = sumC('om', 7);
+  const latest = U.reduce((a, u) => (u.ver && (!a || vcmp(u.ver, a) > 0) ? u.ver : a), '');
+  const ver = {}, dev = {}; U.forEach(u => { ver[u.ver || '؟'] = (ver[u.ver || '؟'] || 0) + 1; dev[u.dev || '؟'] = (dev[u.dev || '؟'] || 0) + 1; });
+  return {days, sign, act, mat, online, todayM, dau, wau, mau, m7, onl7, latest, ver, dev, hasAct, new7: U.filter(u => now - u.created < 7 * DAY).length};
+}
+function render() {
+  const s = stats(), U = S.users, live = S.tour.filter(t => t.meta.st === 'live');
+  const kp = (l, v, sub, cls) => `<div class="k ${cls || ''}"><small>${l}</small><b>${v}</b><i>${sub || ''}</i></div>`;
+  const vers = Object.entries(s.ver).sort((a, b) => vcmp(b[0], a[0])), vtot = U.length || 1, VC = ['#c6f432', '#7aa8ff', '#ffd35c', '#ff7a7a', '#b794f6', '#6c7686'];
+  const old = U.filter(u => s.latest && (!u.ver || vcmp(u.ver, s.latest) < 0)).length;
+  const grp = {}; S.errs.forEach(e => { const k = String(e.m || '').slice(0, 110); (grp[k] = grp[k] || []).push(e); });
+  const errRows = Object.entries(grp).sort((a, b) => b[1].length - a[1].length).slice(0, 12);
+  const name = id => (U.find(u => u.id === id) || {}).name || id.slice(0, 6);
+  root.innerHTML = `<div class="top"><h1>لوحة المالك <span class="tag">OWNER</span></h1><div class="ctl"><select class="chip" id="rg"><option value="7">آخر 7 أيام</option><option value="14">آخر 14 يوم</option><option value="30">آخر 30 يوم</option></select><button class="chip" id="rf">تحديث ⟳</button><button class="chip" id="cv">تصدير CSV ⇩</button><span>${esc(S.me.email)}</span><button class="chip" id="so">خروج</button></div></div>
+<div class="wrap">
+<div class="kpis">${kp('إجمالي اللاعبين', nf(U.length), '+' + s.new7 + ' آخر 7 أيام')}${kp('أونلاين دلوقتي', '<span class="dot"></span>' + s.online.length, s.online.filter(u => u.st === 'match').length + ' في ماتش · ' + s.online.filter(u => u.st === 'lobby').length + ' لوبي', 'live')}${kp('نشطين: يوم / أسبوع / شهر', s.dau + ' / ' + s.wau + ' / ' + s.mau, s.hasAct ? '' : 'من آخر دخول (النشاط اليومي لسه بيتجمّع)')}${kp('ماتشات النهارده', s.todayM != null ? nf(s.todayM) : '—', nf(s.m7) + ' في آخر 7 أيام')}${kp('أونلاين بين لاعبين ≈', nf(Math.round(s.onl7 / 2)), 'آخر 7 أيام · تقدير (الماتش بيتعد للاتنين)')}${kp('بطولات أصحاب', S.tour.length, live.length + ' شغّالة دلوقتي')}</div>
+<div class="row"><div class="card"><h3>لاعبين جدد كل يوم</h3><div class="s">من تاريخ التسجيل</div>${line(s.sign, 520, 140, '#c6f432')}</div><div class="card"><h3>لاعبين نشطين كل يوم</h3><div class="s">${s.hasAct ? 'دخلوا اللعبة في اليوم' : 'آخر دخول (قبل ما يبدأ التجميع اليومي)'}</div>${line(s.act, 520, 140, '#7aa8ff')}</div><div class="card"><h3>ماتشات كل يوم</h3><div class="s">لاعب-ماتش · بيتجمّع من أول تحديث</div>${bars(s.mat, 420, 140, '#ffd35c')}</div></div>
+<div class="row"><div class="card"><h3>أونلاين دلوقتي</h3><div class="s">${s.online.length} لاعب</div><table><thead><tr><th>اللاعب</th><th>الحالة</th><th>النسخة</th><th>الجهاز</th></tr></thead><tbody>${s.online.slice(0, 12).map(u => `<tr class="click" data-u="${esc(u.id)}"><td>${esc(u.name)}</td><td class="${u.st === 'match' ? 'bz' : 'on'}">● ${u.st === 'match' ? 'في ماتش' : u.st === 'lobby' ? 'لوبي' : 'أونلاين'}</td><td class="mono">${esc(u.ver || '؟')}</td><td>${DEV[u.dev] || '؟'}</td></tr>`).join('') || '<tr><td colspan="4" class="off">مفيش حد أونلاين دلوقتي.</td></tr>'}</tbody></table></div>
+<div class="card"><h3>إصدارات اللعبة</h3><div class="s">${old ? old + ' لاعب لسه على نسخة أقدم من ' + esc(s.latest) : 'الكل على آخر نسخة'}</div>${vers.map(([v, n], i) => `<div class="lg"><span dir="ltr">${esc(v)}</span><span>${n} · ${Math.round(100 * n / vtot)}%</span></div><div class="bar"><i style="width:${100 * n / vtot}%;background:${VC[Math.min(i, 5)]}"></i></div>`).join('')}<div class="s">الأجهزة: ${Object.entries(s.dev).map(([d, n]) => (DEV[d] || '؟') + ' ' + Math.round(100 * n / vtot) + '%').join(' · ')}</div></div>
+<div class="card"><h3>سجل الأخطاء</h3><div class="s">آخر 35 يوم · ${S.errs.length} خطأ</div><table><thead><tr><th>الخطأ</th><th>مرات</th><th>لاعبين</th></tr></thead><tbody>${errRows.map(([m, a]) => `<tr class="click" data-e="${esc(m)}"><td class="err">${esc(m)}</td><td>${a.length}</td><td>${new Set(a.map(x => x.u)).size}</td></tr>`).join('') || '<tr><td colspan="3" class="off">مفيش أخطاء متسجّلة.</td></tr>'}</tbody></table></div></div>
+<div class="row"><div class="card"><h3>آخر ظهور</h3><div class="s">من وقت الاتصال في Firebase نفسه (مش بيكتبه اللاعب)</div><table><thead><tr><th>اللاعب</th><th>آخر ظهور</th><th>الحالة</th></tr></thead><tbody>${U.slice().sort((a, b) => b.seen - a.seen).slice(0, 10).map(u => `<tr class="click" data-u="${esc(u.id)}"><td>${esc(u.name)}</td><td>${u.on ? 'دلوقتي' : ago(u.seen)}</td><td class="${u.on ? (u.st === 'match' ? 'bz' : 'on') : 'off'}">${u.on ? '● ' + (u.st === 'match' ? 'في ماتش' : u.st === 'lobby' ? 'لوبي' : 'أونلاين') : 'أوفلاين'}</td></tr>`).join('')}</tbody></table></div>
+<div class="card"><h3>آخر المسجلين</h3><div class="s">الاسم · الإيميل · الوقت</div><table><tbody>${U.slice().sort((a, b) => b.created - a.created).slice(0, 8).map(u => `<tr class="click" data-u="${esc(u.id)}"><td>${esc(u.name)}</td><td class="mono">${esc(u.email)}</td><td>${ago(u.created)}</td></tr>`).join('')}</tbody></table></div>
+<div class="card"><h3>بطولات الأصحاب</h3><div class="s">آخر ${S.tour.length} بطولة</div><table><thead><tr><th>الكود</th><th>المضيف</th><th>لاعبين</th><th>الحالة</th></tr></thead><tbody>${S.tour.slice(0, 8).map(t => `<tr><td class="mono" style="color:var(--ac)">${esc(t.code.toUpperCase())}</td><td>${esc(t.meta.hostName || '')}</td><td>${t.seats}</td><td class="${t.meta.st === 'live' ? 'on' : 'off'}">${t.meta.st === 'live' ? '● شغّالة' : 'لوبي'}</td></tr>`).join('') || '<tr><td colspan="4" class="off">لسه مفيش بطولات.</td></tr>'}</tbody></table></div></div>
+<div class="card"><h3>كل المسجلين</h3><div class="s" id="uc"></div><div class="tools"><input id="sq" type="search" placeholder="دوّر بالاسم أو الإيميل أو الكود…" value="${esc(S.q)}"><select class="chip" id="pp"><option>25</option><option>50</option><option>100</option></select><label class="chip"><input type="checkbox" id="onl" style="margin-inline-end:6px">أونلاين بس</label></div><div style="overflow:auto"><table id="ut"></table></div><div class="pg" id="pgn"></div></div>
+${U.some(u => u.hasStats) ? `<div class="card" style="border-color:#5b3a3a"><h3>إحصائيات قديمة لسه موجودة</h3><div class="s">${U.filter(u => u.hasStats).length} لاعب لسه عنده فوز وخسارة قديمة اتكتبت قبل ما نقفلها. تصفيرها بيمسحها نهائيًا.</div><button class="chip" id="rs" style="border-color:#ff7a7a;color:#ffb4b4">صفّر الإحصائيات القديمة لكل اللاعبين</button> <span class="note" id="rsn"></span></div>` : ''}
+<p class="sample">مفيش أي رقم بيكتبه اللاعب عن نفسه (فوز أو خسارة أو أهداف). الأرقام هنا: بيانات Firebase نفسها (التسجيل وآخر ظهور وأونلاين)، وعدّادات ماتشات يومية تقريبية.</p></div>`;
+  $('#rg').value = String(S.days); $('#rg').onchange = e => { S.days = +e.target.value; render(); }; $('#rf').onclick = load; $('#cv').onclick = csv; $('#so').onclick = () => signOut(auth);
+  $('#pp').value = String(S.per); $('#pp').onchange = e => { S.per = +e.target.value; S.pg = 0; usersTable(); };
+  $('#sq').oninput = e => { S.q = e.target.value; S.pg = 0; usersTable(); }; $('#onl').checked = !!S.onlyOn; $('#onl').onchange = e => { S.onlyOn = e.target.checked; S.pg = 0; usersTable(); };
+  root.querySelectorAll('[data-u]').forEach(r => { r.onclick = () => detail(r.dataset.u); }); root.querySelectorAll('[data-e]').forEach(r => { r.onclick = () => errDetail(r.dataset.e, grp, name); });
+  usersTable(); const rs = $('#rs'); if (rs) rs.onclick = resetStats;
+}
+async function resetStats() {
+  const ids = S.users.filter(u => u.hasStats).map(u => u.id); if (!ids.length) return; if (!confirm('هتمسح الإحصائيات القديمة (فوز وخسارة وأهداف) لـ ' + ids.length + ' لاعب. ده مش بيرجع. تكمّل؟')) return;
+  const note = $('#rsn'); let done = 0, bad = 0; note.textContent = 'بنمسح…';
+  for (const id of ids) { try { await set(ref(db, 'cardgoal/users/' + id + '/stats'), null); done++; } catch (e) { bad++; } note.textContent = 'اتمسح ' + done + ' من ' + ids.length + (bad ? ' · فشل ' + bad : ''); }
+  note.textContent = 'خلصنا: اتمسح ' + done + ' لاعب' + (bad ? ' وفشل ' + bad + ' (غالبًا القواعد v1.8 لسه ما اتنشرتش)' : '') + '.'; if (!bad) setTimeout(load, 900);
+}
+const COLS = [['name', 'الاسم'], ['email', 'الإيميل'], ['club', 'النادي'], ['seen', 'آخر ظهور'], ['created', 'مسجّل'], ['ver', 'النسخة'], ['dev', 'الجهاز']];
+function usersTable() {
+  const q = S.q.trim().toLowerCase(); let L = S.users.filter(u => (!S.onlyOn || u.on) && (!q || (u.name + ' ' + u.email + ' ' + u.id + ' ' + u.fc + ' ' + u.club + ' ' + u.tz).toLowerCase().includes(q)));
+  const k = S.sort, d = S.dir; L.sort((a, b) => { const x = a[k], y = b[k]; return (typeof x === 'string' ? x.localeCompare(y) : (x || 0) - (y || 0)) * d; });
+  const pages = Math.max(1, Math.ceil(L.length / S.per)); S.pg = Math.min(S.pg, pages - 1); const rows = L.slice(S.pg * S.per, (S.pg + 1) * S.per);
+  $('#uc').textContent = L.length + ' من ' + S.users.length + ' لاعب' + (q ? ' (بحث)' : '');
+  $('#ut').innerHTML = '<thead><tr><th></th>' + COLS.map(([c, l]) => `<th class="sort" data-c="${c}">${l}${S.sort === c ? (S.dir > 0 ? ' ▲' : ' ▼') : ''}</th>`).join('') + '</tr></thead><tbody>' + rows.map(u => `<tr class="click" data-u="${esc(u.id)}"><td><span class="av">${esc((u.name || '?').slice(0, 1))}</span></td><td><span class="u">${u.on ? '<span class="dot"></span>' : ''}${esc(u.name)}${u.vf ? SEAL : ''}</span></td><td class="mono">${esc(u.email)}</td><td>${esc(u.club)}</td><td class="${u.on ? 'on' : ''}">${u.on ? '● أونلاين' : ago(u.seen)}</td><td>${ago(u.created)}</td><td class="mono">${esc(u.ver || '؟')}</td><td>${DEV[u.dev] || '؟'}</td></tr>`).join('') + '</tbody>';
+  $('#pgn').innerHTML = `<button class="chip" id="pv" ${S.pg ? '' : 'disabled'}>‹ السابق</button><span>${S.pg + 1} / ${pages}</span><button class="chip" id="nx" ${S.pg < pages - 1 ? '' : 'disabled'}>التالي ›</button>`;
+  $('#pv').onclick = () => { S.pg--; usersTable(); }; $('#nx').onclick = () => { S.pg++; usersTable(); };
+  $('#ut').querySelectorAll('th.sort').forEach(h => { h.onclick = () => { const c = h.dataset.c; if (S.sort === c) S.dir *= -1; else { S.sort = c; S.dir = (c === 'name' || c === 'email' || c === 'club' || c === 'ver' || c === 'dev') ? 1 : -1; } S.pg = 0; usersTable(); }; });
+  $('#ut').querySelectorAll('tbody tr').forEach(r => { r.onclick = () => detail(r.dataset.u); });
+}
+function show(html) { $('#md').innerHTML = html + '<br><button class="chip" id="cl">قفل</button>'; $('#ov').hidden = false; $('#cl').onclick = () => { $('#ov').hidden = true; }; $('#ov').onclick = e => { if (e.target.id === 'ov') $('#ov').hidden = true; }; }
+function detail(id) {
+  const u = S.users.find(x => x.id === id); if (!u) return; const f = t => t ? new Date(t).toLocaleString('ar-EG') : '—';
+  show(`<h2>${esc(u.name)}${u.vf ? SEAL : ''} ${u.on ? '<span class="on" style="font-size:13px">● أونلاين</span>' : ''}</h2><div class="kv"><span>الإيميل</span><b class="mono">${esc(u.email)}</b><span>الدخول بـ</span><b>${esc(u.provider)}</b><span>معرّف المستخدم</span><b class="mono">${esc(u.id)}</b><span>كود الصداقة</span><b class="mono">${esc(u.fc)}</b><span>النادي</span><b>${esc(u.club || '—')}</b><span>سجّل في</span><b>${f(u.created)}</b><span>آخر دخول</span><b>${f(u.last)}</b><span>آخر ظهور</span><b>${u.on ? 'أونلاين دلوقتي' : f(u.seen)}</b><span>النسخة</span><b class="mono">${esc(u.ver || '؟')}</b><span>الجهاز</span><b>${DEV[u.dev] || '؟'}</b><span>المنطقة الزمنية</span><b class="mono">${esc(u.tz || '؟')}</b></div><br><button class="chip" id="c1">انسخ الإيميل</button> <button class="chip" id="c2">انسخ المعرّف</button>`);
+  $('#c1').onclick = () => navigator.clipboard && navigator.clipboard.writeText(u.email); $('#c2').onclick = () => navigator.clipboard && navigator.clipboard.writeText(u.id);
+}
+function errDetail(m, grp, name) {
+  const a = (grp[m] || []).slice().sort((x, y) => (y.t || 0) - (x.t || 0)).slice(0, 30);
+  show(`<h2>الخطأ (${(grp[m] || []).length} مرة)</h2><p class="err" style="margin-bottom:10px">${esc(m)}</p><table><thead><tr><th>الوقت</th><th>اللاعب</th><th>النسخة</th><th>الجهاز</th><th>الشاشة</th></tr></thead><tbody>${a.map(e => `<tr><td>${ago(e.t)}</td><td>${esc(name(e.u))}</td><td class="mono">${esc(e.v || '')}</td><td>${DEV[e.d] || '؟'}</td><td>${esc(e.s || '')}</td></tr>`).join('')}</tbody></table>`);
+}
+function csv() {
+  const cols = ['id', 'name', 'email', 'provider', 'club', 'fc', 'created', 'seen', 'ver', 'dev', 'tz', 'vf'], q = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+  const rows = [cols.join(',')].concat(S.users.map(u => cols.map(c => q(c === 'created' || c === 'seen' ? (u[c] ? new Date(u[c]).toISOString() : '') : u[c])).join(',')));
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + rows.join('\n')], {type: 'text/csv;charset=utf-8'})); a.download = 'cardgoal-users-' + dkey(Date.now()) + '.csv'; a.click();
+}
+</script>
+</body>
+</html>
