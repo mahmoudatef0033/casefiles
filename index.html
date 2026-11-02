@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ملفات مباحث — ثلاث عشرة قضية</title>
+<title>ملفات مباحث — ١٧ قضية تحقيق</title>
 <meta name="theme-color" content="#1E1B17">
-<meta name="description" content="خمس قضايا تحقيق أصلية بالعربية والإنجليزية — Five original investigation case files in Arabic and English.">
+<meta name="description" content="١٧ قضية تحقيق أصلية بالعربية والإنجليزية — 17 original investigation cases in Arabic and English.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ملفات مباحث">
@@ -12922,7 +12922,7 @@ function hubList(){
         '<button class="btn ghost" id="coordBtn" style="color:#C7BEA9;box-shadow:inset 0 0 0 1.5px #6B6459">'+t().cdBtn+'</button>'+
         '<button class="btn ghost" id="boardBtn" style="color:#C7BEA9;box-shadow:inset 0 0 0 1.5px #6B6459">'+t().boardBtn+(S.board.length?' ('+N(S.board.length)+')':'')+'</button>'+
         (S.unlocked<CASES_LEN?'<button class="btn ghost" id="unlockAll" style="color:#C7BEA9;box-shadow:inset 0 0 0 1.5px #6B6459">'+t().unlockAll+'</button>':'')+
-        rmHubBtn()+langBtn()+
+        pwaBtn()+rmHubBtn()+langBtn()+
       '</div>'+
     '</div>';
 
@@ -13647,6 +13647,32 @@ function revealSolution(){
   dlgBody.querySelector("#bk").onclick=()=>{dlg.close();hub();};
 }
 
+/* ===== تثبيت التطبيق (PWA) ===== */
+var PWA={ev:null};
+function pwaStandalone(){try{return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;}catch(e){return false;}}
+function pwaIOS(){try{return /iphone|ipad|ipod/i.test(navigator.userAgent);}catch(e){return false;}}
+function pwaShow(){return !pwaStandalone()&&(!!PWA.ev||pwaIOS());}
+function pwaBtn(){
+  return pwaShow()?'<button class="btn ghost" id="pwaBtn" style="color:#C7BEA9;box-shadow:inset 0 0 0 1.5px #6B6459">📲 '+(LANG==="en"?"Install app":"تثبيت التطبيق")+'</button>':'';
+}
+function pwaAfterHub(){
+  const b=document.getElementById("pwaBtn");if(!b)return;
+  b.onclick=function(){
+    if(PWA.ev){
+      const ev=PWA.ev;ev.prompt();
+      Promise.resolve(ev.userChoice).then(function(){PWA.ev=null;if(S.view==="hub")hub();});
+    }else{
+      const en=LANG==="en";
+      const m=rmModal('<div class="rm-bh">'+(en?"Install on iPhone / iPad":"التثبيت على آيفون / آيباد")+'</div><div class="rm-bb"><p class="rm-hint" style="font-size:15px;line-height:2">'+
+        (en?'1. Open this page in <b>Safari</b>.<br>2. Tap the <b>Share</b> button (square with an arrow).<br>3. Choose <b>Add to Home Screen</b>.'
+           :'١. افتح الصفحة من <b>Safari</b>.<br>٢. اضغط زرار <b>المشاركة</b> (المربع اللي فيه سهم لفوق).<br>٣. اختار <b>إضافة إلى الشاشة الرئيسية</b>.')+
+        '</p><div class="rm-act"><button class="btn" id="pwaX">'+(en?"Got it":"تمام")+'</button></div></div>');
+      m.querySelector("#pwaX").onclick=rmClose;
+    }
+  };
+}
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();PWA.ev=e;if(S.view==="hub")hub();});
+window.addEventListener("appinstalled",function(){PWA.ev=null;if(S.view==="hub")hub();});
 /* تسجيل Service Worker للعمل بدون إنترنت */
 if("serviceWorker" in navigator){
   window.addEventListener("load",function(){
@@ -13660,7 +13686,7 @@ paintBG();
    التقدّم لايف، توزيع القضايا، رسائل موجّهة، طرد، وطلب مساعدة.
    الاتصال: Firebase Realtime Database لو الإعدادات اتحطّت، وإلا وضع تجريبي محلي.
    ===================================================================== */
-const RM_APP_VER="v23-rooms";
+const RM_APP_VER="v24-rooms";
 /* ← الصق هنا إعدادات Firebase (Project settings ▸ Your apps ▸ Web app) */
 const RM_FIREBASE_CONFIG={apiKey:"AIzaSyB1uQzbqn3FQpNpM4uLzQh-52UeOD_NQnw",authDomain:"case-files-c3b1e.firebaseapp.com",databaseURL:"https://case-files-c3b1e-default-rtdb.firebaseio.com",projectId:"case-files-c3b1e",appId:"1:707863157302:web:6c57c6f1481d16264ed697"};
 const RM_LINK=(function(){try{return new URLSearchParams(location.search).get("room");}catch(e){return null;}})();
@@ -14164,6 +14190,7 @@ function rmHubBtn(){
   return '<button class="btn ghost" id="rmHubBtn" style="color:#C7BEA9;box-shadow:inset 0 0 0 1.5px #6B6459">'+rt("hubBtn")+'</button>';
 }
 function rmAfterHub(){
+  if(typeof pwaAfterHub==="function")pwaAfterHub();
   const b=document.getElementById("rmHubBtn");
   if(b)b.onclick=function(){if(RM.active&&RM.role==="player")rmOpenBoard();else rmOpenJoin("");};
   rmPaintBanner();rmPaintPill();

@@ -1,0 +1,20 @@
+{
+  "id": "./",
+  "name": "ملفات مباحث",
+  "short_name": "ملفات مباحث",
+  "description": "لعبة تحقيق جنائي مصرية: ١٧ قضية بالعربي والإنجليزي، للفرق والإيفينتات.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#1E1B17",
+  "theme_color": "#1E1B17",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
