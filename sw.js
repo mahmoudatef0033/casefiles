@@ -1,7 +1,7 @@
 /* ملفات مباحث — Service Worker
    الاستراتيجية: الشبكة أولاً (عشان التحديثات توصل فوراً وقت الإيفينت)،
    والنسخة المحفوظة احتياطي لو مفيش إنترنت. Firebase والخطوط بتروح للشبكة مباشرة. */
-const CACHE = "mm-pwa-v26";
+const CACHE = "mm-pwa-v27";
 const CORE = ["./", "index.html", "manifest.json", "icon-192.png", "icon-512.png",
               "icon-maskable-512.png", "apple-touch-icon.png", "favicon.png"];
 

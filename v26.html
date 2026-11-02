@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#1E1B17">
 <meta name="description" content="١٧ قضية تحقيق أصلية بالعربية والإنجليزية — 17 original investigation cases in Arabic and English.">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ملفات مباحث">
 <link rel="manifest" href="manifest.json">
@@ -1191,7 +1192,7 @@ ol.tlrl li.miss em{color:var(--blood)}
 .toast .tg{flex:0 0 auto;font-family:var(--sans);font-size:11.5px;font-weight:600;color:var(--blood);
   padding:4px 9px;box-shadow:inset 0 0 0 1px var(--blood)}
 .toast:hover{transform:translateY(-2px)}
-.sheetdoc.memo{max-width:640px}
+.sheetdoc.memo{max-width:none}
 .dtop2{display:flex;gap:14px;align-items:flex-start;padding:22px 26px 14px;
   border-bottom:2px solid var(--ink)}
 .dtop2 .crest{width:46px;flex:0 0 46px;color:var(--ink)}
@@ -14923,7 +14924,6 @@ function rmOpenScreen(){
 function rmCloseScreen(){
   const s=document.getElementById("rmScreen");if(s)s.remove();
   if(RM.screenKey){document.removeEventListener("keydown",RM.screenKey);RM.screenKey=null;}
-  try{if(document.fullscreenElement)document.exitFullscreen();}catch(e){}
 }
 function rmScreenPaint(room){
   const s=document.getElementById("rmScreen");if(!s||!room||!room.meta)return;
@@ -15984,23 +15984,82 @@ window.addEventListener('load', function(){
   }, 1200);
 });
 
-/* ===== Fullscreen ===== */
+/* ===== Fullscreen (v27): دخول تلقائي + ESC مطوّل على اللاب + رجوع مرتين على الموبايل ===== */
 (function(){
-  var btn=document.getElementById('fsBtn');
-  var icon=document.getElementById('fsIcon');
-  if(!btn) return;
+  var D=document,R=D.documentElement,btn=D.getElementById('fsBtn'),icon=D.getElementById('fsIcon');
+  var PREF="mm_fs_pref_v1";
   var fsPath='<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>';
   var exitPath='<path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>';
-  btn.onclick=function(){
-    if(!document.fullscreenElement){
-      document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();
-    } else {
-      document.exitFullscreen&&document.exitFullscreen();
-    }
-  };
-  document.addEventListener('fullscreenchange',function(){
-    if(icon) icon.innerHTML=document.fullscreenElement?exitPath:fsPath;
+  var req=R.requestFullscreen||R.webkitRequestFullscreen,canFS=!!req;
+  var G={armed:true,guard:false,last:0,hinted:false};
+  function isFS(){return !!(D.fullscreenElement||D.webkitFullscreenElement);}
+  function mq(q){try{return matchMedia(q).matches;}catch(e){return false;}}
+  /* ملحوظة: Chrome بيعتبر display-mode:fullscreen شغّال كمان لما نطلب الشاشة الكاملة من الصفحة،
+     فبنسأل مرة واحدة وقت التحميل (قبل أي طلب): ده تطبيق مثبّت بيفتح شاشة كاملة ولا لأ */
+  var APPFULL=mq('(display-mode: fullscreen)')&&!isFS();
+  function dmFull(){return APPFULL;}
+  function dmApp(){return APPFULL||mq('(display-mode: standalone)')||navigator.standalone===true;}
+  function touch(){return mq('(pointer: coarse)')||/Android|iPhone|iPad|iPod/i.test(navigator.userAgent||"");}
+  function pref(){try{return localStorage.getItem(PREF);}catch(e){return null;}}
+  function setPref(v){try{localStorage.setItem(PREF,v);}catch(e){}}
+  function say(m){try{rmToast(m,LANG==="en"?"Full screen":"الشاشة الكاملة");}catch(e){}}
+  function enter(){
+    if(!canFS||isFS()||dmFull())return Promise.resolve(false);
+    try{return Promise.resolve(req.call(R,{navigationUI:"hide"})).then(function(){return true;},function(){return false;});}
+    catch(e){return Promise.resolve(false);}
+  }
+  function exit(){try{(D.exitFullscreen||D.webkitExitFullscreen).call(D);}catch(e){}}
+  function lock(){
+    try{if(navigator.keyboard&&navigator.keyboard.lock)return navigator.keyboard.lock(["Escape"]).then(function(){return true;},function(){return false;});}catch(e){}
+    return Promise.resolve(false);
+  }
+  function unlock(){try{if(navigator.keyboard&&navigator.keyboard.unlock)navigator.keyboard.unlock();}catch(e){}}
+  function hint(locked){
+    if(G.hinted)return;G.hinted=true;var en=LANG==="en";
+    if(touch())say(en?"To exit full screen: press Back twice.":"للخروج من الشاشة الكاملة: اضغط رجوع مرتين.");
+    else say(locked?(en?"To exit full screen: hold ESC.":"للخروج من الشاشة الكاملة: اضغط ESC مطوّلاً."):(en?"Press ESC to exit full screen.":"اضغط ESC للخروج من الشاشة الكاملة."));
+  }
+  function paint(){
+    if(icon)icon.innerHTML=isFS()?exitPath:fsPath;
+    if(btn)btn.style.display=(!canFS||dmFull())?"none":"";
+  }
+  /* رجوع مرتين (موبايل): نلفّ زرار الرجوع بحارس في سجل المتصفح */
+  function guardOn(){
+    if(G.guard||!touch())return;G.guard=true;
+    try{if(!(history.state&&history.state.mmfs))history.pushState({mmfs:1},"");}catch(e){}
+  }
+  function guardOff(){G.guard=false;}
+  window.addEventListener('popstate',function(){
+    if(!G.guard)return;
+    var now=Date.now();
+    if(now-G.last<2500){G.guard=false;if(isFS()){exit();}else{try{history.back();}catch(e){}}return;}
+    G.last=now;try{history.pushState({mmfs:1},"");}catch(e){}
+    say(LANG==="en"?"Press Back again to exit.":"اضغط رجوع مرة تانية للخروج.");
   });
+  function onChange(){
+    paint();
+    if(isFS()){
+      setPref("on");guardOn();
+      lock().then(function(ok){hint(ok);});
+    }else{
+      unlock();guardOff();
+      var user=true;try{user=D.hasFocus();}catch(e){}
+      if(user)setPref("off");else G.armed=true;      /* لو اتقفل بسبب نافذة منبثقة (جوجل) نرجع ندخل تاني */
+    }
+  }
+  D.addEventListener('fullscreenchange',onChange);D.addEventListener('webkitfullscreenchange',onChange);
+  /* أول لمسة/ضغطة: ندخل الشاشة الكاملة لوحدنا (المتصفح بيمنعها من غير لمسة) */
+  function arm(){
+    if(!G.armed)return;
+    if(!canFS||dmFull()||isFS()){G.armed=false;return;}
+    if(pref()==="off")return;
+    setTimeout(function(){if(isFS()||!G.armed)return;enter().then(function(ok){if(ok)G.armed=false;});},80);
+  }
+  D.addEventListener('click',arm,true);D.addEventListener('touchend',arm,true);
+  if(btn)btn.onclick=function(){if(isFS()){setPref("off");exit();}else{setPref("on");enter();}};
+  /* التطبيق المثبّت على الموبايل: رجوع مرتين للخروج */
+  if(dmApp())guardOn();
+  paint();
 })();
 
 /* ===== إشارة الحفظ ===== */
